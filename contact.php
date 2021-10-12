@@ -1,10 +1,8 @@
 <?php
-
 $fullName = $customerEmail =  $message = '';
 $errors = array('fullName' => '', 'customerEmail' => '', 'message' => '');
 
 if (isset($_POST['submit'])) {
-
     $myEmail = "danysko5@gmail.com";
     $timeStamp = date("dd/M/YY HH:i:s");
     $body = "";
@@ -13,7 +11,6 @@ if (isset($_POST['submit'])) {
     $customerEmail = $_POST['customerEmail'];
     $chosenSubject = $_POST['subject'];
     $message = $_POST['message'];
-
 
     $body .= "From: " . $fullName . " at $timeStamp" . "\r\n";
     $body .= "Email: " . $customerEmail . "\r\n";
@@ -40,12 +37,11 @@ if (isset($_POST['submit'])) {
         $errors['message'] = "A message is required.";
     } 
     
-    else {
+    if(!empty($fullName) && !empty($customerEmail) && !empty($message)) {
         mail($myEmail, $chosenSubject, $body);
         header("Location: public/mail_sent.php");
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -61,11 +57,11 @@ if (isset($_POST['submit'])) {
 <div class="form-wrapper">
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
         <label for="name">Full Name ✍🏻</label>  <span class="error"><?php echo $errors['fullName'] ?></span><br />
-        <input type="text" id="fullName" name="fullName" placeholder="Full Name" required />
+        <input type="text" id="fullName" name="fullName" placeholder="Full Name" required/>
         <br />
         
         <label for="yourEmail">Your Email 📧</label><span class="error"><?php echo $errors['customerEmail'] ?></span> <br />
-        <input type="email" id="customerEmail" name="customerEmail" placeholder="Your Email" required />
+        <input type="email" id="customerEmail" name="customerEmail" placeholder="Your Email" required/>
         <br />
         <label for="subject">What is your reason for contacting us? 🧐</label>
         <br />
