@@ -1,0 +1,390 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+* {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+
+html {
+    background: url('assets/images/wall.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/*HEADER*//*HEADER*//*HEADER*//*HEADER*//*HEADER*//*HEADER*/
+/*HEADER*//*HEADER*//*HEADER*//*HEADER*//*HEADER*//*HEADER*/
+.mid-line {
+    width: 100%;
+    text-align: center;
+    top: 2em;
+    position: fixed;
+    z-index: 3;
+}
+
+.mid-line a.lang {
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+}
+
+.mid-line a.kr {
+    color: blue;
+}
+
+.nav {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    position: fixed;
+    background-color: white;
+    padding: 3em;
+    z-index: 2;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0px 5px 60px -15px #111;
+}
+
+.nav .logo {
+    display: block;
+    border: 3px solid black;
+    padding: 5px 20px 5px 20px;
+    margin-left: 2em;
+}
+
+.nav .menu a {
+    color: black;
+    text-decoration: none;
+    font-weight: bolder;
+    line-height: 3em;
+}
+
+.nav .menu a:hover {
+    color: #666;
+}
+
+.nav .menu {
+    word-spacing: 2em;
+}
+
+.line {
+    width: 60px;
+    height: 3px;
+    background: black;
+    margin-top: 1.5em;
+}
+
+.linet {
+    width: 800px;
+    height: 3px;
+    background: black;
+    margin-top: 1.5em;
+}
+
+.icons {
+    margin-top: 1em;
+}
+
+.icons i {
+    margin-right: 1em;
+}
+
+/*SHOP*//*SHOP*//*SHOP*//*SHOP*//*SHOP*//*SHOP*//*SHOP*/
+/*SHOP*//*SHOP*//*SHOP*//*SHOP*//*SHOP*//*SHOP*//*SHOP*/
+.shop-nav {
+    display: grid;
+    margin-top: 12em;
+}
+
+.shop-nav nav a {
+    color: white;
+    padding: 1.5em;
+    margin: 1em;
+    border: 1px dotted white;
+    background-color: black;
+    text-decoration: none;
+    font-size: 1vw;
+    transition: .3s ease-in-out;
+}
+
+.shop-nav nav a:hover {
+    background-color: blue;
+}
+
+.shop-wrapper {
+    width: 100%;
+    background-color: black;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.product-view {
+    padding-top: 6em;
+    display: flex;
+}
+
+.product {
+    width: 25%;
+    padding: 2em;
+    filter: grayscale(100%);
+}
+
+.product:hover {
+    cursor: pointer;
+    filter: grayscale(0%);
+}
+
+.product-image img {
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+    margin-top: 3em;
+}
+
+.product-title {
+    color: white;
+    font-size: 1vw;
+    text-align: center;
+    margin-top: 1em;
+}
+
+.product-price {
+    color: #666;
+    text-align: center;
+    margin-top: 1em;
+    font-size: .6vw;
+}
+
+.most-popular {
+    color: white;
+    text-align: center;
+    padding-top: 6em;
+    font-size: 1.3vw;
+}
+
+.pagination {
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    margin-top: 6em;
+}
+
+.page {
+    color: white;
+    margin-top: 1em;
+    font-size: .9vw;
+}
+
+/*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*/
+/*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*/
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 14em;
+}
+
+main .latest {
+    margin-top: 2em;
+    font-size: 100px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    width: 100%;
+}
+
+.site-desc {
+    font-size: 1.5vw;
+    margin-top: 2em;
+    color: #666;
+}
+
+img.arrow {
+    margin-top: 7em;
+    animation: MoveUpDown 2s linear infinite;
+    justify-content: center;
+    display: flex;
+}
+
+/*OTHER*//*OTHER*//*OTHER*//*OTHER*//*OTHER*//*OTHER*//*OTHER*/
+/*OTHER*//*OTHER*//*OTHER*//*OTHER*//*OTHER*//*OTHER*//*OTHER*/
+@keyframes MoveUpDown {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-1em);
+    }
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: black;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #b2b2b2;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: blue;
+}
+
+.latest-keebs {
+    width: 100%;
+    display: flex;
+    color: white;
+    height: 100vh;
+    background-color: black;
+    margin-top: 16em;
+}
+
+.latest-keebs h3.keeb-name {
+    margin-top: 5em;
+    font-size: 3vw;
+    letter-spacing: 0.5em;
+    text-align: center;
+}
+
+.keebord {
+    display: flex;
+    margin-top: 12em;
+    width: 75%;
+}
+
+.keeb-info {
+    font-size: 1.5vw;
+    padding: 1.5em;
+    line-height: 1.5em;
+    margin-left: 2em;
+    margin-top: -1em;
+}
+
+.getit {
+    padding: 1em;
+    margin-top: 2em;
+    border: 1px dotted white;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    font-size: 0.8vw;
+    transition: ease 0.3s;
+}
+
+.getit:hover {
+    background-color: blue;
+}
+
+/*FORM*//*FORM*//*FORM*//*FORM*//*FORM*//*FORM*//*FORM*//*FORM*/
+/*FORM*//*FORM*//*FORM*//*FORM*//*FORM*//*FORM*//*FORM*//*FORM*/
+.form-wrapper {
+    display: grid;
+    margin-top: 6em;
+    background-color: black;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+form {
+    padding: 4em;
+    color: white;
+    margin-top: 3em;
+}
+
+form label {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.1vw;
+}
+
+form input {
+    font-size: 0.9vw;
+    padding: 1em;
+    margin-bottom: 3em;
+    margin-top: 1em;
+    width: 600px;
+    border-radius: 0px;
+}
+
+form select {
+    font-size: 0.9vw;
+    padding: 1em;
+    margin-bottom: 3em;
+    margin-top: 1em;
+    width: 600px;
+    border-radius: 0px;
+}
+
+form textarea {
+    font-size: 0.9vw;
+    padding: 1em;
+    margin-bottom: 3em;
+    margin-top: 1em;
+    width: 600px;
+    border-radius: 0px;
+}
+
+form .form-buttons {
+    display: flex;
+}
+
+form .form-buttons button {
+    border: none;
+    cursor: pointer;
+}
+
+.send {
+    color: white;
+    background-color: blue;
+    font-size: 0.9vw;
+    padding: 1em;
+    margin-bottom: 3em;
+    margin-top: 1em;
+    width: 300px;
+    transition: 0.3s ease-in;
+}
+
+.send:hover {
+    background-color: white;
+    color: black;
+}
+
+.messup:hover {
+    background-color: black;
+}
+
+.messup {
+    color: white;
+    background-color: red;
+    font-size: 0.9vw;
+    padding: 1em;
+    margin-bottom: 3em;
+    margin-top: 1em;
+    width: 300px;
+    transition: 0.3s ease-in;
+}
+
+.error {
+    color: #ff0000 !important;
+}
+
+@media only screen and (max-width: 600px) {
+    header {
+        display: none;
+    }
+    h2.latest {
+        font-size: 12vw;
+        margin-top: 4em;
+    }
+    .latest-keebs {
+        margin-top: 6em;
+    }
+    .mobile {
+        display: block;
+    }
+}
