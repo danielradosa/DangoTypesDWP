@@ -16,12 +16,14 @@ CREATE TABLE `address`  (
   `postalForeign` int NOT NULL,
   PRIMARY KEY (`addrID`)
 );
+INSERT INTO `address` VALUES (1, 'Solvej', '9', 'Denmark', 9999);
 
 CREATE TABLE `postalCode`  (
   `code` int NOT NULL,
   `city` varchar(255) NULL,
   PRIMARY KEY (`code`)
 );
+INSERT INTO `postalCode` VALUES (9999, 'Olympus');
 
 CREATE TABLE `product`  (
   `productID` int NOT NULL AUTO_INCREMENT,
@@ -33,9 +35,10 @@ CREATE TABLE `product`  (
   `switches` varchar(255) NULL,
   `type` varchar(255) NOT NULL,
   `accesories` varchar(255) NULL,
-  `productImage` blob NOT NULL,
+  `productImage` blob NULL,
   PRIMARY KEY (`productID`)
 );
+INSERT INTO `product` VALUES (1, 'PCMK TKL ISO 80%', 'A TKL ISO kit from pulsar.gg', 'Polycarbonate & Plastic', 'No plate', 'black & white & transparent', 'Gateron Milky Yellow', 'diy kit', 'usb cable & dust bag', 'no image');
 
 CREATE TABLE `user`  (
   `userID` int NOT NULL AUTO_INCREMENT,
@@ -47,6 +50,7 @@ CREATE TABLE `user`  (
   `userAddress` int NOT NULL,
   PRIMARY KEY (`userID`)
 );
+INSERT INTO `user` VALUES (1, 'Daniel', 'The', '88998811', 'someone@something.com', 'daniel123', 1);
 
 ALTER TABLE `address` ADD CONSTRAINT `fk_address_postalCode_1` FOREIGN KEY (`postalForeign`) REFERENCES `postalCode`(`code`);
 ALTER TABLE `user` ADD CONSTRAINT `fk_user_address_1` FOREIGN KEY (`userAddress`) REFERENCES `address`(`addrID`);
