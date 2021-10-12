@@ -7,7 +7,12 @@ __________________________
     - html form;
     - php checks;
 __________________________    
-  / DATABASE: working on...
+  / DATABASE: done!
     - er diagram;
     - normalization;
     - script;
+__________________________
+  / ACCOUNT: working on...
+      - login;
+      - register;
+      - my account page w/ addresses;
