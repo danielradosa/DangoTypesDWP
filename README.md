@@ -3,11 +3,11 @@ DWP Assignment
 
 // TO DO
 __________________________
-  / contact form: done!
+  / CONTACT FORM: done!
     - html form;
     - php checks;
 __________________________    
-  / database: working on...
+  / DATABASE: working on...
     - er diagram;
     - normalization;
     - script;
