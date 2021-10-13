@@ -1,4 +1,6 @@
-<?php include('includes/db_connect.php'); ?>
+<?php 
+    include('includes/db_connect.php');
+?>
 
 <head>
     <meta charset="UTF-8" />
@@ -22,14 +24,14 @@
             <div class="line"></div>
             <div class="menu">
                 <a href="home.php">Home</a>
-                <a href="#">Guides</a>
-                <a href="#">Archive</a>
+                <a href="#">About</a>
+                <a href="#">Information</a>
             </div>
             <div class="linet"></div>
             <div class="menu">
                 <a href="shop.php">Shop</a>
                 <a href="contact.php">Contact</a>
-                <a href="account.php">Account</a>
+                <a href="<?php echo 'my_account.php' ?>">Account</a>
             </div>
             <div class="line"></div>
             <div class="icons">
