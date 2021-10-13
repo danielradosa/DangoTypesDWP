@@ -1,3 +1,33 @@
+<?php 
+session_start();
+include('includes/db_connect.php');
+include('includes/functions.php');
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $loginMail = $_POST['loginMail'];
+    $loginPass = $_POST['loginPassword'];
+
+    if (!empty($loginMail) && !empty($loginPass)) {
+        $query = "SELECT * FROM `user` WHERE userEmail = '$loginMail' LIMIT 1";
+        $result = mysqli_query($conn, $query);
+
+        if($result) {
+            if($result && mysqli_num_rows($result) > 0) {
+                $user_data = mysqli_fetch_assoc($result);
+                if ($user_data['userPass'] === $loginPass) {
+                    $_SESSION['userID'] = $user_data['userID'];
+                    header("Location: my_account.php");
+                    die;
+                }
+            }
+        }
+        echo "<div style='background-color: red; color: white; text-align: center; margin: 0 auto; padding: 0.5em; font-size: .9vw; top: 750px; position: fixed' >Wrong e-mail or password</div>";
+    } else {
+        echo "Please check your details again";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +39,7 @@
 </main>
 
 <div class="form-wrapper">
-    <form action="public/login_pro.php" method="POST">
+    <form method="POST">
         <label for="loginMail">E-mail</label> <br />
         <input type="email" id="loginMail" name="loginMail" placeholder="Your E-Mail" required />
         <br />

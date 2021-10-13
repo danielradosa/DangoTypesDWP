@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    include('includes/db_connect.php');
+    include('includes/functions.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

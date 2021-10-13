@@ -47,7 +47,7 @@ CREATE TABLE `user`  (
   `userID` int NOT NULL AUTO_INCREMENT,
   `userEmail` varchar(255) NOT NULL,
   `userPass` varchar(255) NOT NULL,
-  `userAddress` int NOT NULL,
+  `userAddress` int NULL,
   PRIMARY KEY (`userID`)
 );
 INSERT INTO `user` VALUES (1, 'someone@something.com', 'daniel123', 1);
