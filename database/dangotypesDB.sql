@@ -10,13 +10,16 @@ USE dangotypesDB;
 
 CREATE TABLE `address`  (
   `addrID` int NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
+  `phoneNum` varchar(255) NOT NULL,
   `streetName` varchar(255) NOT NULL,
   `streetNum` varchar(255) NOT NULL,
   `country` varchar(255) NOT NULL,
   `postalForeign` int NOT NULL,
   PRIMARY KEY (`addrID`)
 );
-INSERT INTO `address` VALUES (1, 'Solvej', '9', 'Denmark', 9999);
+INSERT INTO `address` VALUES (1,'Daniel', 'Radosa', '55444433', 'Solvej', '9', 'Denmark', 9999);
 
 CREATE TABLE `postalCode`  (
   `code` int NOT NULL,
@@ -42,15 +45,12 @@ INSERT INTO `product` VALUES (1, 'PCMK TKL ISO 80%', 'A TKL ISO kit from pulsar.
 
 CREATE TABLE `user`  (
   `userID` int NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(255) NOT NULL,
-  `lastName` varchar(255) NOT NULL,
-  `phoneNum` varchar(255) NOT NULL,
   `userEmail` varchar(255) NOT NULL,
   `userPass` varchar(255) NOT NULL,
   `userAddress` int NOT NULL,
   PRIMARY KEY (`userID`)
 );
-INSERT INTO `user` VALUES (1, 'Daniel', 'The', '88998811', 'someone@something.com', 'daniel123', 1);
+INSERT INTO `user` VALUES (1, 'someone@something.com', 'daniel123', 1);
 
 ALTER TABLE `address` ADD CONSTRAINT `fk_address_postalCode_1` FOREIGN KEY (`postalForeign`) REFERENCES `postalCode`(`code`);
 ALTER TABLE `user` ADD CONSTRAINT `fk_user_address_1` FOREIGN KEY (`userAddress`) REFERENCES `address`(`addrID`);
