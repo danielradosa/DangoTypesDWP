@@ -31,7 +31,7 @@
             <div class="menu">
                 <a href="shop.php">Shop</a>
                 <a href="contact.php">Contact</a>
-                <a href="<?php echo 'my_account.php' ?>">Account</a>
+                <a href="my_account.php">Account</a>
             </div>
             <div class="line"></div>
             <div class="icons">
