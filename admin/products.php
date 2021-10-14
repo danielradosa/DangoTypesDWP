@@ -19,45 +19,48 @@ $result = $conn->query($sql);
 </head>
 
 <style>
-span a {
-    color: black;
-    text-decoration: none;
-    border: 1px solid black;
-    text-align: center;
-    padding: 1em;
-    margin: 3em;
-    display: block;
-    width: 300px;
-    margin: 0 auto;
-    font-weight: bold;
-}
+    span a {
+        color: black;
+        text-decoration: none;
+        border: 1px solid black;
+        text-align: center;
+        padding: 1em;
+        margin: 3em;
+        display: block;
+        width: 300px;
+        margin: 0 auto;
+        font-weight: bold;
+    }
 
-span a:hover {
-    color: white;
-    background-color: black;
-}
+    span a:hover {
+        color: white;
+        background-color: black;
+    }
 
-table, td, th {
-  border: 1px solid black;
-  padding: 1em;
-  text-align: center;
-}
+    table,
+    td,
+    th {
+        border: 1px solid black;
+        padding: 1em;
+        text-align: center;
+    }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 3em;
-}
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 3em;
+    }
 
-h1 {
-    text-align: center;
-    margin-top: 3em;
-}
+    h1 {
+        text-align: center;
+        margin-top: 3em;
+    }
 </style>
 
 <body>
     <h1>All Products</h1>
-    <span><a href="../admin_panel.php">BACK TO ADMIN PANEL</a></span>
+    <span><a href="../admin_panel.php">BACK TO ADMIN PANEL</a></span><br>
+    <span><a href="addProduct.php">CREATE NEW PRODUCT</a></span>
 
     <table>
         <thead>
@@ -71,13 +74,11 @@ h1 {
                 <th scope="col">Switches</th>
                 <th scope="col">Type</th>
                 <th scope="col">Accesories</th>
-                <th scope="col">Change</th>
             </tr>
         </thead>
         <tbody>
-        <?php while ($row = $result->fetch_assoc()) { ?>
-            <tr>
-                
+            <?php while ($row = $result->fetch_assoc()) { ?>
+                <tr>
                     <td><?php echo $row['productID'] ?></td>
                     <td><?php echo  $row['title'] ?></td>
                     <td><?php echo  $row['description'] ?></td>
@@ -87,12 +88,13 @@ h1 {
                     <td><?php echo  $row['switches'] ?></td>
                     <td><?php echo  $row['type'] ?></td>
                     <td><?php echo  $row['accesories'] ?></td>
-                    <td>
-                        <a href="updateUser.php?Id=<?php echo $row['productID'] ?>" >Update</a>
-                        <a href="delete.php?delete=<?php echo $row['productID'] ?>" style="color: red;">Delete</a>
-                    </td>
-               
-            </tr>
+                    <span style="font-size: 1.3em;">product ID: <?php echo $row['productID'] . " "; ?></span>
+                    <form action="editProduct.php" method="POST">
+                        <input type="hidden" name="id_to_delete" value="<?php echo $row['productID']; ?>">
+                        <input type="submit" name="update" value="Update" style="color: blue;">
+                        <input type="submit" name="delete" value="Delete" style="color: red;">
+                    </form> <br>
+                </tr>
             <?php } ?>
         </tbody>
     </table>

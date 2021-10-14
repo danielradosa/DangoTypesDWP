@@ -38,7 +38,7 @@ CREATE TABLE `product`  (
   `switches` varchar(255) NULL,
   `type` varchar(255) NOT NULL,
   `accesories` varchar(255) NULL,
-  `productImage` blob NOT NULL,
+  `productImage` blob NULL,
   PRIMARY KEY (`productID`)
 );
 INSERT INTO `product` VALUES (1, 'PCMK TKL ISO 80%', 'A TKL ISO kit from pulsar.gg', 'Polycarbonate & Plastic', 'No plate', 'black & white & transparent', 'Gateron Milky Yellow', 'diy kit', 'usb cable & dust bag', 'product-images/pcmk.png');
