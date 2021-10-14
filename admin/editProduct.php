@@ -12,4 +12,5 @@ if (isset($_POST['delete'])) {
     } else {
         echo 'query error: ' . mysqli_error($conn);
     }
+    header("Location: products.php");
 }

@@ -39,9 +39,9 @@ CREATE TABLE `product`  (
   `type` varchar(255) NOT NULL,
   `accesories` varchar(255) NULL,
   `productImage` blob NULL,
+  `dateCreated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`productID`)
 );
-INSERT INTO `product` VALUES (1, 'PCMK TKL ISO 80%', 'A TKL ISO kit from pulsar.gg', 'Polycarbonate & Plastic', 'No plate', 'black & white & transparent', 'Gateron Milky Yellow', 'diy kit', 'usb cable & dust bag', 'product-images/pcmk.png');
 
 CREATE TABLE `user`  (
   `userID` int NOT NULL AUTO_INCREMENT,
@@ -51,6 +51,7 @@ CREATE TABLE `user`  (
   PRIMARY KEY (`userID`)
 );
 INSERT INTO `user` VALUES (1, 'someone@something.com', 'daniel123', 1);
+INSERT INTO `user` VALUES (NULL, 'admin@something.com', 'admin', NULL);
 
 ALTER TABLE `address` ADD CONSTRAINT `fk_address_postalCode_1` FOREIGN KEY (`postalForeign`) REFERENCES `postalCode`(`code`);
 ALTER TABLE `user` ADD CONSTRAINT `fk_user_address_1` FOREIGN KEY (`userAddress`) REFERENCES `address`(`addrID`);
