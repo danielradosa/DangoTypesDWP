@@ -6,15 +6,22 @@
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $regMail = $_POST['registerMail'];
         $regPass = $_POST['registerPassword'];
-    
-        if (!empty($regMail) && !empty($regPass)) {
-            $query = "INSERT INTO `user` (userEmail, userPass) VALUES ('$regMail', '$regPass')";
-            mysqli_query($conn, $query);
-            header("Location: account.php");
-            die;
-        } else {
-            echo "Please check your details again";
+        $regPassTwo = $_POST['registerPassTwo'];
+        
+        if ($regPass !== $regPassTwo) {
+            echo "<div style='background-color: red; color: white; text-align: center; margin: 0 auto; padding: 0.5em; font-size: .9vw; top: 750px; position: fixed' >Passwords do not match</div>";
         }
+        if ($regPass === $regPassTwo) {
+            if  (!empty($regMail) && !empty($regPass) && !empty($regPassTwo)) {
+                $hashed_password = password_hash($regPass, PASSWORD_BCRYPT);
+                $query = "INSERT INTO `user` (userEmail, userPass) VALUES ('$regMail', '$hashed_password')";
+                mysqli_query($conn, $query);
+                header("Location: account.php");
+                die;
+            } else {
+                echo "<div style='background-color: red; color: white; text-align: center; margin: 0 auto; padding: 0.5em; font-size: .9vw; top: 750px; position: fixed' >Fields cannot be empty</div>";
+            }
+        }  
     }
 ?>
 
@@ -35,6 +42,9 @@
         <br />
         <label for="registerPassword">Password</label> <br />
         <input type="password" id="registerPassword messup" name="registerPassword" placeholder="Your Password" required />
+        <br />
+        <label for="registerPassword">Repeat Password</label> <br />
+        <input type="password" id="registerPassword messup" name="registerPassTwo" placeholder="Your Password" required />
         <br />
         <label for="subject">Already have an account? <a href="account.php" >Log in here.</a></label>
         <br />

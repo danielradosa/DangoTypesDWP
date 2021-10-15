@@ -14,18 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if ($result) {
             if ($result && mysqli_num_rows($result) > 0) {
                 $user_data = mysqli_fetch_assoc($result);
-                if ($user_data['userPass'] === $loginPass) {
+                if (password_verify($loginPass, $user_data['userPass'])) {
                     $_SESSION['userID'] = $user_data['userID'];
                     header("Location: my_account.php");
                     die;
                 } else {
-                    header("Location: home.php");
+                    echo "<div style='background-color: red; color: white; text-align: center; margin: 0 auto; padding: 0.5em; font-size: .9vw; top: 750px; position: fixed' >Wrong e-mail or password</div>";
                 }
             }
         } 
         echo "<div style='background-color: red; color: white; text-align: center; margin: 0 auto; padding: 0.5em; font-size: .9vw; top: 750px; position: fixed' >Wrong e-mail or password</div>";
     } else {
-        echo "Please check your details again";
+        echo "<div style='background-color: red; color: white; text-align: center; margin: 0 auto; padding: 0.5em; font-size: .9vw; top: 750px; position: fixed' >Please fill out everything</div>";
     }
 }
 ?>
