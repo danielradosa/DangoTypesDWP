@@ -6,6 +6,7 @@ $title = $description = $color = $type = '';
 $errors = array('title' => '', 'description' => '', 'color' => '', 'type' => '');
 
 if (isset($_POST['submit'])) {
+
     if (empty($_POST['title'])) {
         $errors['title'] = "A title is required <br>";
     }
@@ -33,8 +34,20 @@ if (isset($_POST['submit'])) {
         $type = mysqli_real_escape_string($conn, $_POST['type']);
         $accessories = mysqli_real_escape_string($conn, $_POST['accessories']);
 
-        $sql = "INSERT INTO product(title, description, caseMaterial, plateMaterial, color, switches, `type`, accesories) 
-        VALUES ('$title', '$description', '$caseMaterial', '$plateMaterial', '$color', '$switches', '$type', '$accessories')";
+        $filename = $_FILES['image']['name'];
+        $imageFileType = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        $extensions_arr = array("jpg", "jpeg", "png", "gif");
+
+        if (in_array($imageFileType, $extensions_arr)) {
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], '../database/product-images' . $filename)) {
+                echo "image uploaded";
+            } else {
+                echo "error";
+            }
+        }
+
+        $sql = "INSERT INTO product(title, description, caseMaterial, plateMaterial, color, switches, `type`, accesories, productImage) 
+                        VALUES ('$title', '$description', '$caseMaterial', '$plateMaterial', '$color', '$switches', '$type', '$accessories', '$filename')";
         if (mysqli_query($conn, $sql)) {
             header('Locaiton: ?succesfully added');
         } else {

@@ -74,6 +74,7 @@ $result = $conn->query($sql);
                 <th scope="col">Switches</th>
                 <th scope="col">Type</th>
                 <th scope="col">Accesories</th>
+                <th scope="col">Image</th>
             </tr>
         </thead>
         <tbody>
@@ -88,6 +89,11 @@ $result = $conn->query($sql);
                     <td><?php echo  $row['switches'] ?></td>
                     <td><?php echo  $row['type'] ?></td>
                     <td><?php echo  $row['accesories'] ?></td>
+                    <td>
+                        <?php 
+                            echo "<img src=".$row['productImage']." />"; 
+                        ?>
+                    </td>
                     <span style="font-size: 1.3em;">product ID: <?php echo $row['productID'] . " "; ?></span>
                     <form action="editProduct.php" method="POST">
                         <input type="hidden" name="id_to_delete" value="<?php echo $row['productID']; ?>">
