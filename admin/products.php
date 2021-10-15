@@ -91,7 +91,7 @@ $result = $conn->query($sql);
                     <td><?php echo  $row['accesories'] ?></td>
                     <td>
                         <?php 
-                            echo "<img src=".$row['productImage']." />"; 
+                            echo "<img src=".'../database/product-images/'.$row['productImage']." style='width: 50%;' />"; 
                         ?>
                     </td>
                     <span style="font-size: 1.3em;">product ID: <?php echo $row['productID'] . " "; ?></span>
