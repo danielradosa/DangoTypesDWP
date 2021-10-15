@@ -46,9 +46,10 @@ $result = $conn->query($sql);
     }
 
     table {
-        width: 100%;
+        width: 50%;
         border-collapse: collapse;
         margin-top: 3em;
+        display: block;
     }
 
     h1 {
@@ -91,12 +92,13 @@ $result = $conn->query($sql);
                     <td><?php echo  $row['accesories'] ?></td>
                     <td>
                         <?php 
-                            echo "<img src=".'../database/product-images/'.$row['productImage']." style='width: 50%;' />"; 
+                            echo "<img src=".'../database/product-images/'.$row['productImage']." style='width: 20%;' />"; 
                         ?>
                     </td>
                     <span style="font-size: 1.3em;">product ID: <?php echo $row['productID'] . " "; ?></span>
                     <form action="editProduct.php" method="POST">
                         <input type="hidden" name="id_to_delete" value="<?php echo $row['productID']; ?>">
+                        <input type="hidden" name="id_to_update" value="<?php echo $row['productID']; ?>">
                         <input type="submit" name="update" value="Update" style="color: blue;">
                         <input type="submit" name="delete" value="Delete" style="color: red;">
                     </form> <br>
