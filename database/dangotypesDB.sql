@@ -19,18 +19,17 @@ CREATE TABLE `address`  (
   `postalForeign` int NOT NULL,
   PRIMARY KEY (`addrID`)
 );
-INSERT INTO `address` VALUES (1,'Daniel', 'Radosa', '55444433', 'Solvej', '9', 'Denmark', 9999);
 
 CREATE TABLE `postalCode`  (
   `code` int NOT NULL,
   `city` varchar(255) NULL,
   PRIMARY KEY (`code`)
 );
-INSERT INTO `postalCode` VALUES (9999, 'Olympus');
 
 CREATE TABLE `product`  (
   `productID` int NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
+  `price` int NOT NULL,
   `description` text NOT NULL,
   `caseMaterial` varchar(255) NULL,
   `plateMaterial` varchar(255) NULL,
@@ -50,8 +49,6 @@ CREATE TABLE `user`  (
   `userAddress` int NULL,
   PRIMARY KEY (`userID`)
 );
-INSERT INTO `user` VALUES (1, 'someone@something.com', 'daniel123', 1);
-INSERT INTO `user` VALUES (NULL, 'admin@something.com', 'admin', NULL);
 
 ALTER TABLE `address` ADD CONSTRAINT `fk_address_postalCode_1` FOREIGN KEY (`postalForeign`) REFERENCES `postalCode`(`code`);
 ALTER TABLE `user` ADD CONSTRAINT `fk_user_address_1` FOREIGN KEY (`userAddress`) REFERENCES `address`(`addrID`);

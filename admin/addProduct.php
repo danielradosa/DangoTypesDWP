@@ -2,13 +2,17 @@
 
 include('../includes/db_connect.php');
 
-$title = $description = $color = $type = '';
-$errors = array('title' => '', 'description' => '', 'color' => '', 'type' => '');
+$title = $price = $description = $color = $type = '';
+$errors = array('title' => '','price'=>'', 'description' => '', 'color' => '', 'type' => '');
 
 if (isset($_POST['submit'])) {
 
     if (empty($_POST['title'])) {
         $errors['title'] = "A title is required <br>";
+    }
+
+    if (empty($_POST['price'])) {
+        $errors['price'] = "A price is required <br>";
     }
 
     if (empty($_POST['description'])) {
@@ -26,6 +30,7 @@ if (isset($_POST['submit'])) {
     if (array_filter($errors)) {
     } else {
         $title = mysqli_real_escape_string($conn, $_POST['title']);
+        $price = mysqli_real_escape_string($conn, $_POST['price']);
         $description = mysqli_real_escape_string($conn, $_POST['description']);
         $caseMaterial = mysqli_real_escape_string($conn, $_POST['caseMaterial']);
         $plateMaterial = mysqli_real_escape_string($conn, $_POST['plateMaterial']);
@@ -47,8 +52,8 @@ if (isset($_POST['submit'])) {
             }
         }
 
-        $sql = "INSERT INTO product(title, description, caseMaterial, plateMaterial, color, switches, `type`, accesories, productImage) 
-                        VALUES ('$title', '$description', '$caseMaterial', '$plateMaterial', '$color', '$switches', '$type', '$accessories', '$filename')";
+        $sql = "INSERT INTO product(title, price, description, caseMaterial, plateMaterial, color, switches, `type`, accesories, productImage) 
+                        VALUES ('$title', '$price', '$description', '$caseMaterial', '$plateMaterial', '$color', '$switches', '$type', '$accessories', '$filename')";
         if (mysqli_query($conn, $sql)) {
             header('Locaiton: ?succesfully added');
         } else {
@@ -69,6 +74,9 @@ if (isset($_POST['submit'])) {
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
         <label for="title">Title</label>
         <input type="text" name="title"> <br> <br>
+
+        <label for="title">Price</label>
+        <input type="number" name="price"> <br> <br>
 
         <label for="description">Description</label>
         <input type="text" name="description"> <br> <br>

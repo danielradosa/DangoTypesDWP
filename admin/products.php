@@ -113,6 +113,7 @@ $result = $conn->query($sql);
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
+                <th scope="col">Price</th>
                 <th scope="col">Description</th>
                 <th scope="col">Case Material</th>
                 <th scope="col">Plate Material</th>
@@ -129,6 +130,7 @@ $result = $conn->query($sql);
                 <tr>
                     <td style="font-weight: bold;">#<?php echo $row['productID'] ?></td>
                     <td><?php echo  $row['title'] ?></td>
+                    <td>$<?php echo  $row['price'] ?></td>
                     <td><?php echo  $row['description'] ?></td>
                     <td><?php echo  $row['caseMaterial'] ?></td>
                     <td><?php echo  $row['plateMaterial'] ?></td>
