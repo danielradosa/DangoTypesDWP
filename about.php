@@ -1,0 +1,28 @@
+<?php
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<?php require('public/header.php'); ?>
+
+<main>
+    <h2 class="latest">ABOUT US</h2>
+    <h4 class="site-desc">Learn About Some Things About Us</h4>
+</main>
+
+<div class="form-wrapper">
+    <p style="color: white; padding: 2em; font-size: 3vw; text-align: center;">Dangotypes is an online webshop <br>
+        focused on selling mechanical keyboards <br>
+        and its accessories. <br>
+        <span style="font-size: 2vw; padding: 2em; display: block; color: gray;">
+            If you need any guidance please, <br> contact us either through our <a href="">contact form</a> <br>
+            or call us here: 220-555-1376
+        </span>
+    </p>
+</div>
+
+</body>
+
+</html>

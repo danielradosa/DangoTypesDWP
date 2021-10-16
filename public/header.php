@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://kit.fontawesome.com/605e9f634b.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/496d8d4e8f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/style.css" />
     <link rel="stylesheet" href="actions.css" />
     <title>dango types</title>
@@ -14,7 +14,7 @@
 <body>
     <header>
         <div class="mid-line">
-            <a href="#" class="lang en">EN | </a>
+            <a href="home.php" class="lang en">EN | </a>
             <a href="kr" class="lang kr">KR</a>
         </div>
         <div class="nav">
@@ -24,7 +24,7 @@
             <div class="line"></div>
             <div class="menu">
                 <a href="home.php">Home</a>
-                <a href="#">About</a>
+                <a href="about.php">About</a>
                 <a href="#">Information</a>
             </div>
             <div class="linet"></div>

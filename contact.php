@@ -13,7 +13,8 @@ if (isset($_POST['submit'])) {
     $message = $_POST['message'];
 
     $body .= "From: " . $fullName . " at $timeStamp" . "\r\n";
-    $body .= "Email: " . $customerEmail . "\r\n";
+    $body .= "Customer Email: " . $customerEmail . "\r\n";
+    $body .= "Subject: " . $chosenSubject . "\r\n";
     $body .= "Message: " . $message . "\r\n";
 
     if (empty($fullName)) {
@@ -22,7 +23,6 @@ if (isset($_POST['submit'])) {
         if (!preg_match("/^([a-zA-Z' ]+)$/", $fullName)) {
             $errors['fullName'] = "Your name must be a valid name.";
         }
-        
     }
 
     if (empty($customerEmail)) {

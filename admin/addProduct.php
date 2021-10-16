@@ -41,6 +41,7 @@ if (isset($_POST['submit'])) {
         if (in_array($imageFileType, $extensions_arr)) {
             if (move_uploaded_file($_FILES["image"]["tmp_name"], '../database/product-images/' . $filename)) {
                 echo "image uploaded";
+                header("Location: products.php");
             } else {
                 echo "error";
             }
