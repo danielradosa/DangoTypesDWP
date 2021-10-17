@@ -56,8 +56,8 @@ if (isset($_POST['update'])) {
             }
         }
 
-        $sql = "UPDATE product SET title = '$title', price = '$price', description = '$description', caseMaterial = '$caseMaterial', plateMaterial = '$plateMaterial', 
-                color = '$color', switches = '$switches', `type` = '$type', accessories = '$accessories' WHERE productID = '$id_to_update'";
+        $sql = "UPDATE `product` SET `title` = '$title', `price` = '$price', `description` = '$description', `caseMaterial` = '$caseMaterial', `plateMaterial` = '$plateMaterial', 
+                `color` = '$color', `switches` = '$switches', `type` = '$type', `accessories` = '$accessories' WHERE productID = '$id_to_update'";
         $result = mysqli_query($conn, $sql);
         if ($result) {
             header('Location: ?succesfully updated');
