@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
             }
         }
 
-        $sql = "INSERT INTO product(title, price, description, caseMaterial, plateMaterial, color, switches, `type`, accesories, productImage) 
+        $sql = "INSERT INTO product(title, price, description, caseMaterial, plateMaterial, color, switches, `type`, accessories, productImage) 
                         VALUES ('$title', '$price', '$description', '$caseMaterial', '$plateMaterial', '$color', '$switches', '$type', '$accessories', '$filename')";
         if (mysqli_query($conn, $sql)) {
             header('Locaiton: ?succesfully added');

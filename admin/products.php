@@ -137,7 +137,7 @@ $result = $conn->query($sql);
                     <td><?php echo  $row['color'] ?></td>
                     <td><?php echo  $row['switches'] ?></td>
                     <td><?php echo  $row['type'] ?></td>
-                    <td><?php echo  $row['accesories'] ?></td>
+                    <td><?php echo  $row['accessories'] ?></td>
                     <td>
                         <?php
                         echo "<img src=" . '../database/product-images/' . $row['productImage'] . " style='width: 30%;' />";
@@ -145,7 +145,7 @@ $result = $conn->query($sql);
                     </td>
                     <td>
                         <span style="font-size: 1.3em;">Product ID: <?php echo $row['productID'] . " "; ?></span>
-                        <form action="editProduct.php" method="POST">
+                        <form action="deleteProduct.php" method="POST">
                             <div class="edit">
                             <input type="hidden" name="id_to_delete" value="<?php echo $row['productID']; ?>">
                             <input type="hidden" name="id_to_update" value="<?php echo $row['productID']; ?>">
