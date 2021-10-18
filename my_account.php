@@ -8,6 +8,32 @@ $currentUserID = $user_data['userID'];
 $query = "SELECT * FROM `address` WHERE customerForeign = $currentUserID";
 $result = $conn->query($query);
 
+$user_to_update = $_SERVER['QUERY_STRING'];
+$sql = "SELECT * FROM `address` WHERE addrID = $user_to_update"; 
+$result = $conn->query($sql);
+
+if (isset($_POST['update'])) {
+    if (!empty($_POST['firstNameU']) && !empty($_POST['lastNameU']) && !empty($_POST['phoneNumU']) && !empty($_POST['streetNameU']) && !empty($_POST['streetNumU']) && !empty($_POST['postalCodeU']) && !empty($_POST['countryU']) && !empty($_POST['cityU'])) {
+        $firstName = mysqli_real_escape_string($conn, $_POST['firstNameU']);
+        $lastName = mysqli_real_escape_string($conn, $_POST['lastNameU']);
+        $phoneNum = mysqli_real_escape_string($conn, $_POST['phoneNumU']);
+        $streetName = mysqli_real_escape_string($conn, $_POST['streetNameU']);
+        $streetNum = mysqli_real_escape_string($conn, $_POST['streetNumU']);
+        $postalCode = mysqli_real_escape_string($conn, $_POST['postalCodeU']);
+        $city = mysqli_real_escape_string($conn, $_POST['cityU']);
+        $country = mysqli_real_escape_string($conn, $_POST['countryU']);
+
+        $another_query = "UPDATE `address` SET `firstName` = '$firstName', `lastName` = '$lastName', `phoneNum` = '$phoneNum', `streetName` = '$streetName', `streetNum` = '$streetNum', `country` = '$country', `city` = '$city', `postalCode` = '$postalCode' 
+        WHERE addrID = customerForeign";
+        if (mysqli_query($conn, $another_query)) {
+            header('Location: ?succesfully updated');
+        } else {
+            echo 'query error: ' . mysqli_errno($conn);
+        }
+        header("Location: my_account.php?$currentUserID");
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -47,17 +73,17 @@ $result = $conn->query($query);
 
     <?php while ($row = $result->fetch_assoc()) { ?>
     <div style="display: flex;">
-        <form action="<?php echo $_SERVER['PHP_SELF'].'?'.$id_to_create; ?>" method="POST">
-            <input type="text" placeholder="First Name" name="firstName" style="width: 360px;" value="<?php echo $row['firstName'] ?>" required>
-            <input type="text" placeholder="Last Name" name="lastName" style="width: 360px;" value="<?php echo $row['lastName'] ?>" required>
+        <form action="<?php echo $_SERVER['PHP_SELF'] . "?" . $currentUserID ?>" method="POST">
+            <input type="text" placeholder="First Name" name="firstNameU" style="width: 360px;" value="<?php echo $row['firstName'] ?>" required>
+            <input type="text" placeholder="Last Name" name="lastNameU" style="width: 360px;" value="<?php echo $row['lastName'] ?>" required>
             <br>
             <input type="tel" pattern="^[0-9-+\s()]*$" placeholder="Phone +xxxxxxxxx" name="phoneNum" style="width: 360px;" value="<?php echo $row['phoneNum'] ?>" required>
-            <input type="street" placeholder="Street Name" name="streetName" style="width: 300px;" value="<?php echo $row['streetName'] ?>"  required>
-            <input type="text" placeholder="Street Number" name="streetNum" style="width: 300px;" value="<?php echo $row['streetNum'] ?>"  required>
+            <input type="street" placeholder="Street Name" name="streetNameU" style="width: 300px;" value="<?php echo $row['streetName'] ?>"  required>
+            <input type="text" placeholder="Street Number" name="streetNumU" style="width: 300px;" value="<?php echo $row['streetNum'] ?>"  required>
             <br>
-            <input type="number" placeholder="Postal Code: xxxxx" name="postalCode" style="width: 300px;" value="<?php echo $row['postalCode'] ?>" required>
-            <input type="city" placeholder="City" name="city" style="width: 300px;" value="<?php echo $row['city'] ?>" required>
-            <select type="country" name="country" id="country" style="width: 300px;"  required>
+            <input type="number" placeholder="Postal Code: xxxxx" name="postalCodeU" style="width: 300px;" value="<?php echo $row['postalCode'] ?>" required>
+            <input type="city" placeholder="City" name="cityU" style="width: 300px;" value="<?php echo $row['city'] ?>" required>
+            <select type="country" name="country" id="countryU" style="width: 300px;"  required>
                 <option value="<?php echo $row['country'] ?>"><?php echo $row['country'] ?></option>
                 <option value="France">France</option>
                 <option value="France">Slovakia</option>
@@ -66,7 +92,7 @@ $result = $conn->query($query);
             </select>
             <br>
             <input type="reset" name="clear" value="Clear Fields" style="color: white; float: left; border: none; background-color: red; width: 300px;">
-            <input type="submit" name="edit" value="Update Address" style="color: white; background-color: blue; float: right;">
+            <input type="submit" name="update" value="Update Address" style="color: white; background-color: blue; float: right;">
         </form>
     </div>
     <?php } ?>

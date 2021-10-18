@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $user_data = mysqli_fetch_assoc($result);
                 if (password_verify($loginPass, $user_data['userPass'])) {
                     $_SESSION['userID'] = $user_data['userID'];
-                    header("Location: my_account.php");
+                    header("Location: my_account.php?".$user_data['userID']);
                     die;
                 } else {
                     echo "<div style='background-color: red; color: white; text-align: center; margin: 0 auto; padding: 0.5em; font-size: .9vw; top: 750px; position: fixed' >Wrong e-mail or password</div>";
