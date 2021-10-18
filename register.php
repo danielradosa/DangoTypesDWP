@@ -7,21 +7,21 @@
         $regMail = $_POST['registerMail'];
         $regPass = $_POST['registerPassword'];
         $regPassTwo = $_POST['registerPassTwo'];
-        
+
         if ($regPass !== $regPassTwo) {
             echo "<div style='background-color: red; color: white; text-align: center; margin: 0 auto; padding: 0.5em; font-size: .9vw; top: 750px; position: fixed' >Passwords do not match</div>";
         }
         if ($regPass === $regPassTwo) {
             if  (!empty($regMail) && !empty($regPass) && !empty($regPassTwo)) {
                 $hashed_password = password_hash($regPass, PASSWORD_BCRYPT);
-                $query = "INSERT INTO `user` (userEmail, userPass) VALUES ('$regMail', '$hashed_password')";
+                $query = "INSERT INTO `user` (userEmail, userPass, userType) VALUES ('$regMail', '$hashed_password', 0)";
                 mysqli_query($conn, $query);
                 header("Location: account.php");
                 die;
             } else {
                 echo "<div style='background-color: red; color: white; text-align: center; margin: 0 auto; padding: 0.5em; font-size: .9vw; top: 750px; position: fixed' >Fields cannot be empty</div>";
             }
-        }  
+        }
     }
 ?>
 

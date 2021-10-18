@@ -16,14 +16,10 @@ CREATE TABLE `address`  (
   `streetName` varchar(255) NOT NULL,
   `streetNum` varchar(255) NOT NULL,
   `country` varchar(255) NOT NULL,
-  `postalForeign` int NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `postalCode` int NOT NULL,
+  `customerForeign` int NOT NULL,
   PRIMARY KEY (`addrID`)
-);
-
-CREATE TABLE `postalCode`  (
-  `code` int NOT NULL,
-  `city` varchar(255) NULL,
-  PRIMARY KEY (`code`)
 );
 
 CREATE TABLE `product`  (
@@ -46,9 +42,11 @@ CREATE TABLE `user`  (
   `userID` int NOT NULL AUTO_INCREMENT,
   `userEmail` varchar(255) NOT NULL,
   `userPass` varchar(255) NOT NULL,
-  `userAddress` int NULL,
+  `userType` boolean NOT NULL,
+  `addressForeign` int NULL,
   PRIMARY KEY (`userID`)
 );
 
-ALTER TABLE `address` ADD CONSTRAINT `fk_address_postalCode_1` FOREIGN KEY (`postalForeign`) REFERENCES `postalCode`(`code`);
-ALTER TABLE `user` ADD CONSTRAINT `fk_user_address_1` FOREIGN KEY (`userAddress`) REFERENCES `address`(`addrID`);
+ALTER TABLE `address` ADD CONSTRAINT `fk_user_foreign_1` FOREIGN KEY (`customerForeign`) REFERENCES `user`(`userID`);
+ALTER TABLE `user` ADD CONSTRAINT `fk_user_address_1` FOREIGN KEY (`addressForeign`) REFERENCES `address`(`addrID`);
+ALTER TABLE `user` ADD CONSTRAINT UQ_userEmail UNIQUE (userEmail);
