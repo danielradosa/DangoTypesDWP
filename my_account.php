@@ -7,6 +7,8 @@ $currentUserID = $user_data['userID'];
 
 $query = "SELECT * FROM `address` WHERE customerForeign = $currentUserID";
 $result = $conn->query($query);
+$addRes = $conn->query($query);
+$addCheck = mysqli_fetch_assoc($addRes);
 
 $user_to_update = $_SERVER['QUERY_STRING'];
 $sql = "SELECT * FROM `address` WHERE addrID = $user_to_update"; 
@@ -23,17 +25,18 @@ if (isset($_POST['update'])) {
         $city = mysqli_real_escape_string($conn, $_POST['cityU']);
         $country = mysqli_real_escape_string($conn, $_POST['countryU']);
 
-        $another_query = "UPDATE `address` SET `firstName` = '$firstName', `lastName` = '$lastName', `phoneNum` = '$phoneNum', `streetName` = '$streetName', `streetNum` = '$streetNum', `country` = '$country', `city` = '$city', `postalCode` = '$postalCode' 
-        WHERE addrID = customerForeign";
-        if (mysqli_query($conn, $another_query)) {
+        $updateQuery = "UPDATE `address` SET `firstName` = '$firstName', `lastName` = '$lastName', `phoneNum` = '$phoneNum', `streetName` = '$streetName', `streetNum` = '$streetNum', `country` = '$country', `city` = '$city', `postalCode` = '$postalCode' 
+        WHERE `customerForeign` = $currentUserID";
+
+        $updateResult = mysqli_query($conn, $updateQuery);
+        if ($updateResult) {
             header('Location: ?succesfully updated');
         } else {
             echo 'query error: ' . mysqli_errno($conn);
         }
-        header("Location: my_account.php?$currentUserID");
+        header("Location: account.php");
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -60,20 +63,20 @@ if (isset($_POST['update'])) {
     <h2 style="text-align: center; margin-top: 2em; font-size: 3em;">Your address:</h2> <br>
 
     <?php
-    if ($user_data['addressForeign'] !== NULL) {
+    if ($addCheck['customerForeign'] !== NULL) {
         echo "<p style='text-align: center; font-size: 2em;'>This is your currently used address. <br>
         If you would like to edit it change inserted values and press Update Address.</p>";
     } else if ($user_data['addressForeign'] === NULL) {
         echo "<p style='text-align: center; font-size: 2em;'>You have no address yet. <br>
         Create one now by clicking here:</p>";
         echo "<div style='display: flex; margin-top: 3em;'><a href='create_address.php?$currentUserID' 
-        style='text-align: center; color: white; background-color: black; font-size: 3em; text-decoration: none; padding: 0.5em;'>ADD ADDRESS</a></div>";
+        style='text-align: center; color: white; background-color: black; font-size: 2em; text-decoration: none; padding: 0.7em;'>ADD ADDRESS</a></div>";
     }
     ?>
 
     <?php while ($row = $result->fetch_assoc()) { ?>
     <div style="display: flex;">
-        <form action="<?php echo $_SERVER['PHP_SELF'] . "?" . $currentUserID ?>" method="POST">
+        <form action="<?php echo $_SERVER['PHP_SELF'] . "?" . $user_to_update ?>" method="POST">
             <input type="text" placeholder="First Name" name="firstNameU" style="width: 360px;" value="<?php echo $row['firstName'] ?>" required>
             <input type="text" placeholder="Last Name" name="lastNameU" style="width: 360px;" value="<?php echo $row['lastName'] ?>" required>
             <br>
@@ -83,7 +86,7 @@ if (isset($_POST['update'])) {
             <br>
             <input type="number" placeholder="Postal Code: xxxxx" name="postalCodeU" style="width: 300px;" value="<?php echo $row['postalCode'] ?>" required>
             <input type="city" placeholder="City" name="cityU" style="width: 300px;" value="<?php echo $row['city'] ?>" required>
-            <select type="country" name="country" id="countryU" style="width: 300px;"  required>
+            <select type="country" name="countryU" id="countryU" style="width: 300px;"  required>
                 <option value="<?php echo $row['country'] ?>"><?php echo $row['country'] ?></option>
                 <option value="France">France</option>
                 <option value="France">Slovakia</option>
@@ -91,7 +94,7 @@ if (isset($_POST['update'])) {
                 <option value="France">Germany</option>
             </select>
             <br>
-            <input type="reset" name="clear" value="Clear Fields" style="color: white; float: left; border: none; background-color: red; width: 300px;">
+            <input type="reset" name="clear" value="Clear Fields" style="color: white; background-color: red; float: left; border: none; width: 300px;">
             <input type="submit" name="update" value="Update Address" style="color: white; background-color: blue; float: right;">
         </form>
     </div>
