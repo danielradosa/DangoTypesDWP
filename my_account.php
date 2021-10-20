@@ -10,7 +10,7 @@ $result = $conn->query($query);
 
 $user_to_update = $_SERVER['QUERY_STRING'];
 $sql = "SELECT * FROM `address` WHERE addrID = $user_to_update"; 
-$result = $conn->query($sql);
+$resultTwo = $conn->query($sql);
 
 if (isset($_POST['update'])) {
     if (!empty($_POST['firstNameU']) && !empty($_POST['lastNameU']) && !empty($_POST['phoneNumU']) && !empty($_POST['streetNameU']) && !empty($_POST['streetNumU']) && !empty($_POST['postalCodeU']) && !empty($_POST['countryU']) && !empty($_POST['cityU'])) {
