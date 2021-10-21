@@ -1,7 +1,17 @@
 <?php
 include('includes/db_connect.php');
 
-$sql = "SELECT * FROM `product`";
+$page = '';
+$product_per_page = 6;
+
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+} else {
+    $page = 1;
+}
+$start_from = ($page-1)*$product_per_page;
+
+$sql = "SELECT * FROM `product` ORDER BY `dateCreated` DESC LIMIT $start_from, $product_per_page";
 $result = $conn->query($sql);
 ?>
 
@@ -29,7 +39,7 @@ $result = $conn->query($sql);
 </div>
 
 <div class="shop-wrapper">
-    <h3 class="most-popular">🌟 Biggest Celebrities 🌟</h3>
+    <h3 class="most-popular">🌟 All Products 🌟</h3>
 
     <div class="product-view">
 
@@ -37,18 +47,29 @@ $result = $conn->query($sql);
 
             <div class="product">
                 <div class="product-image">
-                    <?php echo "<img src=" . 'database/product-images/' . $row['productImage'] . " style='width: 80%; margin: 0 auto; display: block; margin-top: 3em;' />"; ?>
+                    <?php echo "<img src=" . 'database/product-images/' . $row['productImage'] . " style='width: 50%; margin: 0 auto; display: block; margin-top: 3em;' />"; ?>
                 </div>
                 <h4 class="product-title"><?php echo $row['title'] ?></h4>
                 <h5 class="product-price">$ <?php echo $row['price'] ?></h5>
             </div>
-
+    
         <?php } ?>
 
     </div>
 
     <div class="pagination">
-        <span class="page">Page 1 / 3 >>></span>
+        <div class="page" >
+            <span class="page">Page:</span>
+            <?php
+                $page_query = "SELECT * FROM `product` ORDER BY `dateCreated` DESC";
+                $page_result = mysqli_query($conn, $page_query);
+                $total_records = mysqli_num_rows($page_result);
+                $total_pages = ceil($total_records/$product_per_page);
+                for ($i = 1; $i <= $total_pages; $i++) {
+                    echo "<a href='?page=".$i."' style='text-decoration: none; color: blue;'>".$i." "."</a>";
+                }
+            ?>
+        </div>
     </div>
 </div>
 
