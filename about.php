@@ -17,7 +17,7 @@
         focused on selling mechanical keyboards <br>
         and its accessories. <br>
         <span style="font-size: 2vw; padding: 2em; display: block; color: gray;">
-            If you need any guidance please, <br> contact us either through our <a href="">contact form</a> <br>
+            If you need any guidance please, <br> contact us either through our <a href="contact">contact form</a> <br>
             or call us here: 220-555-1376
         </span>
     </p>

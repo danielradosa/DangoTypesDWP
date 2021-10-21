@@ -47,9 +47,10 @@ $result = $conn->query($sql);
 
             <div class="product">
                 <div class="product-image">
-                    <?php echo "<img src=" . 'database/product-images/' . $row['productImage'] . " style='width: 50%; margin: 0 auto; display: block; margin-top: 3em;' />"; ?>
+                    <?php echo "<img src=" . 'database/product-images/' . $row['productImage'] . " style='width: 50%; height: 50%; margin: 0 auto; display: block; margin-top: 3em;' />"; ?>
                 </div>
                 <h4 class="product-title"><?php echo $row['title'] ?></h4>
+                <p class="product-description"><?php echo $row['description'] ?></p>
                 <h5 class="product-price">$ <?php echo $row['price'] ?></h5>
             </div>
     

@@ -122,30 +122,42 @@ html {
     padding-top: 6em;
     display: flex;
     flex-wrap: wrap;
+    padding: 2em;
 }
 
 .product {
-    width: 33%;
+    width: 30%;
     padding: 2em;
-    filter: grayscale(100%);
+    margin: 2em;
     transition: 0.3s ease;
+    background-color: black;
 }
 
 .product:hover {
     cursor: pointer;
-    filter: grayscale(0%);
 }
 
 .product-image img {
-    
+    border: 1px dotted white;
     margin: 0 auto;
     display: block;
     margin-top: 3em;
 }
 
 .product-title {
-    color: white;
+    color: black;
+    background-color: white;
+    width: 510px;
+    padding: 0.9em 0 0.9em 0;
     font-size: 1vw;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 1em;
+}
+
+.product-description {
+    color: white;
+    font-size: 1em;
     text-align: center;
     margin-top: 1em;
 }
@@ -175,6 +187,10 @@ html {
     color: white;
     margin-top: 1em;
     font-size: .9vw;
+}
+
+.active {
+    color: white;
 }
 /*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*/
 /*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*/
