@@ -131,10 +131,11 @@ html {
     margin: 2em;
     transition: 0.3s ease;
     background-color: black;
+    
 }
 
 .product:hover {
-    cursor: pointer;
+    background-color: blue;
 }
 
 .product-image img {
@@ -142,6 +143,7 @@ html {
     margin: 0 auto;
     display: block;
     margin-top: 3em;
+    
 }
 
 .product-title {
@@ -160,6 +162,10 @@ html {
     font-size: 1em;
     text-align: center;
     margin-top: 1em;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
 }
 
 .product-price {
@@ -199,6 +205,65 @@ main {
     flex-wrap: wrap;
     justify-content: center;
     padding-top: 14em;
+}
+
+.sp-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 14em;
+    padding-bottom: 6em;
+}
+
+.sp-container .right {
+    margin-top: 8em;   
+    margin-left: -12em; 
+}
+
+.sp-name {
+    font-size: 3vw;
+    color: white;
+    background-color: black;
+    padding: 0.5em;
+    text-align: center;
+}
+
+.sp-description {
+    font-size: 1vw;
+    color: #666;
+    margin-top: 1em;
+    width: 900px;
+}
+
+.sp-price {
+    font-size: 1vw;
+    color: white;
+    width: 150px;
+    float: left;
+    text-align: center;
+    margin-top: 1em;
+}
+
+.sp-actions {
+    margin-top: 16em;
+}
+
+.sp-actions a {
+    color: black;
+    font-size: 1vw;
+    text-decoration: none;
+}
+
+.sp-actions button {
+    color: white;
+    background-color: black;
+    padding: 0.9em;
+    width: 350px;
+    font-size: 1vw;
+    margin-left: 4em;
+}
+
+.fa-chevron-left {
+    margin-right: 1em;
 }
 
 main .latest {

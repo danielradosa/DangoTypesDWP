@@ -25,12 +25,12 @@
             <div class="menu">
                 <a href="home.php">Home</a>
                 <a href="about.php">About</a>
-                <a href="#">Information</a>
+                <a href="contact.php">Contact</a>
             </div>
             <div class="linet"></div>
             <div class="menu">
-                <a href="shop.php">Shop</a>
-                <a href="contact.php">Contact</a>
+                <a href="shop.php" style="color: blue;">Shop</a>
+                <a href="cart.php">Cart</a>
                 <a href="my_account.php">Account</a>
             </div>
             <div class="line"></div>
