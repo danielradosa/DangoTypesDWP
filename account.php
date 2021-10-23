@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require('public/header.php'); ?>
+<?php include('public/header.php'); ?>
 
 <main>
     <h2 class="latest">LOGIN</h2>

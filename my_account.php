@@ -42,7 +42,7 @@ if (isset($_POST['update'])) {
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require('public/header.php'); ?>
+<?php include('public/header.php'); ?>
 
 <main>
     <h1>Hello, you are logged in as: <?php echo $user_data['userEmail']; ?></h1>

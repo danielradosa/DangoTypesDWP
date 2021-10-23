@@ -29,8 +29,8 @@
             </div>
             <div class="linet"></div>
             <div class="menu">
-                <a href="shop.php" style="color: blue;">Shop</a>
-                <a href="cart.php">Cart</a>
+                <a href="shop.php">Shop</a>
+                <a href="cart.php">Cartㅤ<span style="color: blue;">[0]</span></a>
                 <a href="my_account.php">Account</a>
             </div>
             <div class="line"></div>

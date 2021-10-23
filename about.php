@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require('public/header.php'); ?>
+<?php include('public/header.php'); ?>
 
 <main>
     <h2 class="latest">ABOUT US</h2>

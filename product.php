@@ -16,7 +16,7 @@ $result = $conn->query($query);
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require('public/header.php');  ?>
+<?php include('public/header.php');  ?>
 
 <?php while ($row = $result->fetch_assoc()) { ?>
 
@@ -35,7 +35,7 @@ $result = $conn->query($query);
 
             <div class="sp-actions">
                 <a href="javascript:history.back()"><i class="fas fa-chevron-left"></i>BACK</a>
-                <button>ADD TO CART</button>
+                <a href="public/add_cart.php?id=<?php echo $chosenProduct; ?>">ADD TO CART</a>
             </div>
 
         </div>

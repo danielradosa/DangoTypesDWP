@@ -253,7 +253,7 @@ main {
     text-decoration: none;
 }
 
-.sp-actions button {
+.sp-actions a:nth-child(2) {
     color: white;
     background-color: black;
     padding: 0.9em;
