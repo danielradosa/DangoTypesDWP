@@ -1,4 +1,8 @@
 <?php 
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     include('includes/db_connect.php');
 ?>
 
@@ -30,7 +34,7 @@
             <div class="linet"></div>
             <div class="menu">
                 <a href="shop.php">Shop</a>
-                <a href="cart.php">Cartㅤ<span style="color: blue;">[0]</span></a>
+                <a href="cart.php">Cartㅤ<span style="color: blue;">[<?php echo count($_SESSION['cart']); ?>]</span></a>
                 <a href="my_account.php">Account</a>
             </div>
             <div class="line"></div>

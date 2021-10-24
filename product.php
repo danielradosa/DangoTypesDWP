@@ -1,12 +1,16 @@
 <?php
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+
+$chosenProduct = $_SERVER['QUERY_STRING'];
 
 include('includes/db_connect.php');
 if (!isset($_SERVER['HTTP_REFERER'])) {
     header('location: ../home.php');
     exit;
 }
-
-$chosenProduct = $_SERVER['QUERY_STRING'];
 
 $query = "SELECT * FROM `product` WHERE productID = $chosenProduct";
 $result = $conn->query($query);
@@ -35,7 +39,7 @@ $result = $conn->query($query);
 
             <div class="sp-actions">
                 <a href="javascript:history.back()"><i class="fas fa-chevron-left"></i>BACK</a>
-                <a href="public/add_cart.php?id=<?php echo $chosenProduct; ?>">ADD TO CART</a>
+                <a href="add_to_cart.php?productID=<?php echo $chosenProduct; ?>">ADD TO CART</a>
             </div>
 
         </div>
