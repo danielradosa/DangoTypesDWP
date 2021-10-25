@@ -4,8 +4,8 @@ include('includes/db_connect.php');
 include('includes/functions.php');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $loginMail = $_POST['loginMail'];
-    $loginPass = $_POST['loginPassword'];
+    $loginMail = htmlspecialchars($_POST['loginMail']);
+    $loginPass = htmlspecialchars($_POST['loginPassword']);
 
     if (!empty($loginMail) && !empty($loginPass)) {
         $query = "SELECT * FROM `user` WHERE userEmail = '$loginMail' LIMIT 1";

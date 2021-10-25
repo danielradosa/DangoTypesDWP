@@ -7,10 +7,10 @@ if (isset($_POST['submit'])) {
     $timeStamp = date("dd/M/YY HH:i:s");
     $body = "";
 
-    $fullName = $_POST['fullName'];
-    $customerEmail = $_POST['customerEmail'];
-    $chosenSubject = $_POST['subject'];
-    $message = $_POST['message'];
+    $fullName = htmlspecialchars($_POST['fullName']);
+    $customerEmail = htmlspecialchars($_POST['customerEmail']);
+    $chosenSubject = htmlspecialchars($_POST['subject']);
+    $message = htmlspecialchars($_POST['message']);
 
     $body .= "From: " . $fullName . " at $timeStamp" . "\r\n";
     $body .= "Customer Email: " . $customerEmail . "\r\n";
