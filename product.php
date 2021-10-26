@@ -39,7 +39,7 @@ $result = $conn->query($query);
 
             <div class="sp-actions">
                 <a href="javascript:history.back()"><i class="fas fa-chevron-left"></i>BACK</a>
-                <a href="add_to_cart.php?productID=<?php echo $chosenProduct; ?>">ADD TO CART</a>
+                <a href="add_to_cart.php?<?php echo $chosenProduct; ?>">ADD TO CART</a>
             </div>
 
         </div>

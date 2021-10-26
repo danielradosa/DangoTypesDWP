@@ -34,7 +34,7 @@
             <div class="linet"></div>
             <div class="menu">
                 <a href="shop.php">Shop</a>
-                <a href="cart.php">Cartㅤ<span style="color: blue;">[<?php echo count($_SESSION['cart']); ?>]</span></a>
+                <a href="cart.php">Cartㅤ<span style="color: blue;">[<?php if (empty($_SESSION['cart'])) { echo '0'; } else { echo count($_SESSION['cart']);}?>]</span></a>
                 <a href="my_account.php">Account</a>
             </div>
             <div class="line"></div>

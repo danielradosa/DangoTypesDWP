@@ -280,6 +280,19 @@ main .latest {
     color: #666;
 }
 
+.cart-container {
+    width: 50%;
+    padding-bottom: 6em;
+}
+
+.cart-container img {
+    margin-left: 0em;
+}
+
+.cart-container hr {
+    margin-top: 1em;
+}
+
 img.arrow {
     margin-top: 7em;
     animation: MoveUpDown 2s linear infinite;
