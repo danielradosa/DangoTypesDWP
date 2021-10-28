@@ -9,17 +9,21 @@ if (!isset($_SERVER['HTTP_REFERER'])) {
     exit;
 }
 
-//$chosenProduct = $_SERVER['QUERY_STRING'];
-//$cartArray = $_SESSION['cart'];
+if (!empty($_SESSION['cart'])) {
+    $ids = "";
+    foreach ($_SESSION['cart'] as $id) {
+        $ids = $ids . $id . ",";
+    }
+    $ids = rtrim($ids, ',');
 
-$ids = "";
-foreach ($_SESSION['cart'] as $id) {
-    $ids = $ids . $id . ",";
+    $cartQuery = "SELECT * FROM `product` WHERE productID IN (" . implode(',', $_SESSION['cart']) . ") ";
+    $result = $conn->query($cartQuery);
 }
-$ids = rtrim($ids, ',');
 
-$cartQuery = "SELECT * FROM `product` WHERE productID IN (" . implode(',', $_SESSION['cart']) . ") ";
-$result = $conn->query($cartQuery);
+if (isset($_POST['remove'])) {
+    session_unset();
+    header("Location: cart.php");
+}
 
 ?>
 
@@ -28,7 +32,14 @@ $result = $conn->query($cartQuery);
 
 <?php include('public/header.php');  ?>
 
-<h1 style="padding-top: 2em; padding-bottom: 1em; text-align: center; font-size: 5.1vw;">YOUR CART</h1>
+<?php
+    if (empty($_SESSION['cart'])) {
+        echo "<h1 style='padding-top: 2em; padding-bottom: 1em; text-align: center; font-size: 5.1vw;'>YOUR CART IS EMPTY</h1>";
+    } else if (!empty($_SESSION['cart'])) {
+        echo "<h1 style='padding-top: 2em; padding-bottom: 1em; text-align: center; font-size: 5.1vw;'>YOUR CART</h1>";
+        echo "<h1 style='padding-bottom: 3em; text-align: center; font-size: 2.1vw;'>You have ".count($_SESSION['cart'])." items in your cart</h1>";
+    }
+?>
 
 <?php while ($row = $result->fetch_assoc()) { ?>
     <div class="cart-container">
@@ -37,10 +48,11 @@ $result = $conn->query($cartQuery);
             <p><?php echo $row['description']; ?></p>
             <span><?php echo "$ " . $row['price']; ?></span>
             <?php echo "<img src=" . 'database/product-images/' . $row['productImage'] . " style='width: 10%; height: 10%;  display: block; margin-top: 3em;' />"; ?>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <button type="submit" value="X" name="remove">X</button>
+                <button type="submit" value="ADD 1 MORE" name="remove">ADD 1 MORE</button>
+            </form>
             <hr>
-        </div>
-        <div class="right-cart">
-            
         </div>
     </div>
 <?php } ?>
