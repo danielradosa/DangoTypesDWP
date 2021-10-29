@@ -282,7 +282,8 @@ main .latest {
 
 .cart-container {
     width: 30%;
-    padding-bottom: 6em;
+    padding-bottom: 3em;
+    justify-items: center;
 }
 
 .cart-container img {

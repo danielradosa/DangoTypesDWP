@@ -30,7 +30,9 @@
                     <p class="keeb-info">
                     <?php echo  $row['description'] ?>
                         <br />
-                        <button class="getit">GET IT NOW</button>
+                        <button class="getit">
+                           <a href="<?php echo 'product.php' . '?' . $row['productID']; ?>" style="color: white; text-decoration: none;">GET IT NOW</a>
+                        </button>
                     </p>
                 </div>
             </div>
