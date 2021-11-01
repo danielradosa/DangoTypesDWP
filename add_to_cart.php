@@ -5,9 +5,15 @@ if(!isset($_SESSION))
 } 
 
 $chosenProduct = $_SERVER['QUERY_STRING'];
+$cart = $_SESSION['cart'];
 
-if (empty($_SESSION['cart'])) {
-    $_SESSION['cart'] = array();
+if (empty($cart)) {
+    $cart = array();
 } 
-array_push($_SESSION['cart'], $chosenProduct);
+
+if (!in_array($chosenProduct, $cart)) {
+    array_push($_SESSION['cart'], $chosenProduct);
+}
+
+
 header("Location: shop.php");
