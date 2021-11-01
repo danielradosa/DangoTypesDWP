@@ -18,6 +18,9 @@ $start_from = ($page - 1) * $product_per_page;
 
 $sql = "SELECT * FROM `product` ORDER BY `dateCreated` DESC LIMIT $start_from, $product_per_page";
 $result = $conn->query($sql);
+
+//$sql_priceLow = "SELECT * FROM `product` ORDER BY `price` DESC LIMIT $start_from, $product_per_page";
+//$result_priceLow = $conn->query($sql_priceLow); 
 ?>
 
 <!DOCTYPE html>
@@ -32,11 +35,10 @@ $result = $conn->query($sql);
 
 <div class="shop-nav">
     <nav>
-        <a href="#">DIY Kits</a>
-        <a href="#">Pre-built keyboards</a>
-        <a href="#">PCB's</a>
-        <a href="#">Cases</a>
-        <a href="#">Plates</a>
+        <a href="shop.php">Latest products</a>
+        <a href="#">High to low price</a>
+        <a href="#">Low to high price</a>
+        <a href="#">Keyboards</a>
         <a href="#">Switches</a>
         <a href="#">Keycaps</a>
         <a href="#">Deskmats</a>
