@@ -5,11 +5,11 @@ if(!isset($_SESSION))
 } 
 
 $chosenProduct = $_SERVER['QUERY_STRING'];
-$cart = $_SESSION['cart'];
 
-if (in_array($chosenProduct, $cart)) {
-    unset($chosenProduct);
+$key = array_search($chosenProduct, $_SESSION['cart']);
+
+if ($key !== FALSE) {
+    unset($_SESSION['cart'][$key]);
 }
-
 
 header("Location: cart.php");

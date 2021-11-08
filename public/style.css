@@ -198,6 +198,14 @@ html {
 .active {
     color: white;
 }
+
+.remove-btn {
+    text-decoration: none; 
+    color: red;
+    background-color: black;
+    padding: .4em;
+    float: right;
+}
 /*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*/
 /*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*//*MIDDLE*/
 main {
