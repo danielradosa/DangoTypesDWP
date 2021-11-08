@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION)) {
+if(!isset($_SESSION)) {
     session_start();
 }
 
@@ -19,12 +19,6 @@ if (!empty($_SESSION['cart'])) {
     $cartQuery = "SELECT * FROM `product` WHERE productID IN (" . implode(',', $_SESSION['cart']) . ") ";
     $result = $conn->query($cartQuery);
 }
-
-if (isset($_POST['remove'])) {
-    session_unset();
-    header("Location: cart.php");
-}
-
 ?>
 
 <!DOCTYPE html>
