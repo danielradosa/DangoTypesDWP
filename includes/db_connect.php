@@ -1,6 +1,6 @@
 <?php
 
-$conn = mysqli_connect('localhost', 'root', '', 'dangotypesdb');
+$conn = new mysqli('localhost', 'root', '', 'dangotypesdb');
 
 //check connection
 if (!$conn) {
