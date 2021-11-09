@@ -51,6 +51,11 @@ if (!empty($_SESSION['cart'])) {
                 <span style="color: blue;"><?php echo "$ " . $row['price']; ?></span>
                 <?php echo "<img src=" . 'database/product-images/' . $row['productImage'] . " style='width: 20%; height: 20%;  display: block; margin-top: 1em;
             margin-bottom: 3em;' />"; ?>
+                <?php
+                error_reporting(0);
+                ini_set('display_errors', 0);
+                    $total += $row['price'];
+                ?>
             </div>
         </div>
 
@@ -62,21 +67,12 @@ if (!empty($_SESSION['cart'])) {
 <div class="checkout">
     <span>
         <?php
-        if (!empty($_SESSION['cart'])) {
-            $totalPrice = 0;
-            while ($row = $result->fetch_assoc()) {
-                $totalPrice +=  $row['price'];
-            }
-            echo "Total: $" . $totalPrice;
-        }
+           if (!empty($_SESSION['cart'])) {
+               echo "Total: $" . $total;
+           }
         ?>
     </span>
-
-    <?php
-    if (!empty($_SESSION['cart'])) {
-        echo "<a href='checkout.php' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Checkout</a>";
-    }
-    ?>
+    <a href='checkout.php?<?php echo $total; ?>' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Checkout</a>
 </div>
 
 </body>
