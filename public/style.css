@@ -309,6 +309,11 @@ img.arrow {
     display: flex;
 }
 
+.checkout {
+    display: flex;
+    padding-bottom: 4em;
+}
+
 /*OTHER*//*OTHER*//*OTHER*//*OTHER*//*OTHER*//*OTHER*//*OTHER*/
 /*OTHER*//*OTHER*//*OTHER*//*OTHER*//*OTHER*//*OTHER*//*OTHER*/
 @keyframes MoveUpDown {

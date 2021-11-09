@@ -1,5 +1,5 @@
 <?php
-if(!isset($_SESSION)) {
+if (!isset($_SESSION)) {
     session_start();
 }
 
@@ -20,45 +20,64 @@ if (!empty($_SESSION['cart'])) {
     $result = $conn->query($cartQuery);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <?php include('public/header.php');  ?>
 
 <?php
-    if (empty($_SESSION['cart'])) {
-        echo "<h1 style='padding-top: 2em; padding-bottom: 1em; text-align: center; font-size: 5.1vw;'>YOUR CART IS EMPTY</h1>";
-    } else if (!empty($_SESSION['cart'])) {
-        echo "<h1 style='padding-top: 2em; padding-bottom: 1em; text-align: center; font-size: 5.1vw;'>YOUR CART</h1>";
-        if (count($_SESSION['cart']) <= 1) {
-            echo "<h1 style='padding-bottom: 3em; text-align: center; font-size: 2.1vw;'>You have ".count($_SESSION['cart'])." item in your cart</h1>";
-        } else {
-            echo "<h1 style='padding-bottom: 3em; text-align: center; font-size: 2.1vw;'>You have ".count($_SESSION['cart'])." items in your cart</h1>";
-        }
+if (empty($_SESSION['cart'])) {
+    echo "<h1 style='padding-top: 2em; padding-bottom: 1em; text-align: center; font-size: 5.1vw;'>YOUR CART IS EMPTY</h1>";
+} else if (!empty($_SESSION['cart'])) {
+    echo "<h1 style='padding-top: 2em; padding-bottom: 1em; text-align: center; font-size: 5.1vw;'>YOUR CART</h1>";
+    if (count($_SESSION['cart']) <= 1) {
+        echo "<h1 style='padding-bottom: 3em; text-align: center; font-size: 2.1vw;'>You have " . count($_SESSION['cart']) . " item in your cart</h1>";
+    } else {
+        echo "<h1 style='padding-bottom: 3em; text-align: center; font-size: 2.1vw;'>You have " . count($_SESSION['cart']) . " items in your cart</h1>";
     }
+}
 ?>
 
-<?php 
-if(!empty($_SESSION['cart'])) {
-    while ($row = $result->fetch_assoc()) { 
-    
+<?php
+if (!empty($_SESSION['cart'])) {
+    while ($row = $result->fetch_assoc()) {
+
 ?>
 
-    <div class="cart-container">
-        <div class="left-cart">
-            <h2><?php echo $row['title']; ?><a href="remove_from_cart.php?<?php echo $row['productID']; ?>" class="remove-btn">REMOVE-X</a></h2>
-            <p><?php echo $row['description']; ?></p>
-            <span style="color: blue;"><?php echo "$ " . $row['price']; ?></span>
-            <?php echo "<img src=" . 'database/product-images/' . $row['productImage'] . " style='width: 20%; height: 20%;  display: block; margin-top: 1em;
+        <div class="cart-container">
+            <div class="left-cart">
+                <h2><?php echo $row['title']; ?><a href="remove_from_cart.php?<?php echo $row['productID']; ?>" class="remove-btn">REMOVE-X</a></h2>
+                <p><?php echo $row['description']; ?></p>
+                <span style="color: blue;"><?php echo "$ " . $row['price']; ?></span>
+                <?php echo "<img src=" . 'database/product-images/' . $row['productImage'] . " style='width: 20%; height: 20%;  display: block; margin-top: 1em;
             margin-bottom: 3em;' />"; ?>
+            </div>
         </div>
-    </div>
 
-<?php 
+<?php
     }
-} 
+}
 ?>
+
+<div class="checkout">
+    <span>
+        <?php
+        if (!empty($_SESSION['cart'])) {
+            $totalPrice = 0;
+            while ($row = $result->fetch_assoc()) {
+                $totalPrice +=  $row['price'];
+            }
+            echo "Total: $" . $totalPrice;
+        }
+        ?>
+    </span>
+
+    <?php
+    if (!empty($_SESSION['cart'])) {
+        echo "<a href='checkout.php' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Checkout</a>";
+    }
+    ?>
+</div>
 
 </body>
 
