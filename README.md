@@ -9,7 +9,7 @@ __________________________
 __________________________
   / ACCOUNT: update address needs fix
 __________________________
-  / CART: done?
+  / CART: done!
 __________________________
-  / BACKEND: 69% done...
+  / BACKEND: 74% done...
   
