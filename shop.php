@@ -6,6 +6,8 @@ if(!isset($_SESSION))
 
 include('includes/db_connect.php');
 
+$host = $_SERVER['SERVER_NAME']  . $_SERVER['REQUEST_URI'];
+
 $page = '';
 $product_per_page = 6;
 
@@ -16,11 +18,8 @@ if (isset($_GET['page'])) {
 }
 $start_from = ($page - 1) * $product_per_page;
 
-$sql = "SELECT * FROM `product` ORDER BY `dateCreated` DESC LIMIT $start_from, $product_per_page";
-$result = $conn->query($sql);
-
-//$sql_priceLow = "SELECT * FROM `product` ORDER BY `price` DESC LIMIT $start_from, $product_per_page";
-//$result_priceLow = $conn->query($sql_priceLow); 
+$sqlAll = "SELECT * FROM `product` ORDER BY `dateCreated` DESC LIMIT $start_from, $product_per_page";
+$result = $conn->query($sqlAll);
 ?>
 
 <!DOCTYPE html>
@@ -35,15 +34,11 @@ $result = $conn->query($sql);
 
 <div class="shop-nav">
     <nav>
-        <a href="shop.php">Latest products</a>
-        <a href="#">High to low price</a>
-        <a href="#">Low to high price</a>
-        <a href="#">Keyboards</a>
-        <a href="#">Switches</a>
-        <a href="#">Keycaps</a>
-        <a href="#">Deskmats</a>
+        <a href="shop.php">All products</a>
     </nav>
 </div>
+
+<?php if ($host = 'http://localhost/DangoTypesDWP/shop.php') { ?>
 
 <div class="shop-wrapper">
     <h3 class="most-popular">🌟 All Products 🌟</h3>
@@ -83,6 +78,8 @@ $result = $conn->query($sql);
         </div>
     </div>
 </div>
+
+<?php } ?>
 
 </body>
 

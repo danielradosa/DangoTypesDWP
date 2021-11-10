@@ -10,7 +10,6 @@ function check_login($conn) {
            return $user_data;
        }
    } else {
-       header("Location: account.php");
        die;
    }
 }

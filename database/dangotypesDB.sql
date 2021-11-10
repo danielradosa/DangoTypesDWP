@@ -47,6 +47,31 @@ CREATE TABLE `user`  (
   PRIMARY KEY (`userID`)
 );
 
+CREATE TABLE `order` (
+  `orderID` int NOT NULL AUTO_INCREMENT,
+  `orderMail` varchar(255) NOT NULL,
+  `orderName` varchar(255) NOT NULL,
+  `orderLastName` varchar(255) NOT NULL,
+  `orderPhoneNum` varchar(255) NOT NULL,
+  `orderStreetName` varchar(255) NOT NULL,
+  `orderStreetNum` varchar(255) NOT NULL,
+  `orderCountry` varchar(255) NOT NULL,
+  `orderCity` varchar(255) NOT NULL,
+  `orderPostalCode` int NOT NULL,
+  `orderNumber` varchar(255) NULL,
+  `orderPrice` varchar(255) NULL,
+  `placedAt` datetime NOT NULL,
+  PRIMARY KEY (`orderID`)
+);
+
+CREATE TABLE `orderDetails` (
+  `orderDetailsID` int NOT NULL AUTO_INCREMENT,
+  `orderMail` varchar(255) NOT NULL,
+  `itemsOrdered` varchar(255) NOT NULL,
+  PRIMARY KEY (`orderDetailsID`)
+);
+
 ALTER TABLE `address` ADD CONSTRAINT `fk_user_foreign_1` FOREIGN KEY (`customerForeign`) REFERENCES `user`(`userID`);
 ALTER TABLE `user` ADD CONSTRAINT `fk_user_address_1` FOREIGN KEY (`addressForeign`) REFERENCES `address`(`addrID`);
+ALTER TABLE `orderDetails` ADD CONSTRAINT `fk_user_order_1` FOREIGN KEY (`orderMail`) REFERENCES `order`(`orderMail`);
 ALTER TABLE `user` ADD CONSTRAINT UQ_userEmail UNIQUE (userEmail);

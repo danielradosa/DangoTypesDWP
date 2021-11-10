@@ -1,8 +1,11 @@
 <?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbName = "dangotypesdb";
 
-$conn = new mysqli('localhost', 'root', '', 'dangotypesdb');
+$conn = new mysqli($servername, $username, $password, $dbName);
 
-//check connection
-if (!$conn) {
-    echo 'connection error: ' . mysqli_connect_error();
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }

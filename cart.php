@@ -72,7 +72,9 @@ if (!empty($_SESSION['cart'])) {
            }
         ?>
     </span>
-    <a href='checkout.php?<?php echo $total; ?>' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Checkout</a>
+        <?php if (!empty($_SESSION['cart'])) { ?>
+            <a href='checkout.php?<?php echo $total; ?>' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Checkout</a>
+        <?php } ?>
 </div>
 
 </body>
