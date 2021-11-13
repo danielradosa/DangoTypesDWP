@@ -33,6 +33,7 @@ CREATE TABLE `product`  (
   `switches` varchar(255) NULL,
   `type` varchar(255) NOT NULL,
   `accessories` varchar(255) NULL,
+  `stock` int NOT NULL,
   `productImage` blob NULL,
   `dateCreated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`productID`)
