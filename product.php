@@ -36,6 +36,26 @@ $relatedSresult = $conn->query($relatedS);
         <div class="right">
             <h2 class="sp-name">"<?php echo $row['title']; ?>"</h2>
             <p class="sp-description"><?php echo $row['description']; ?></p>
+            <p class="sp-description">
+                <?php 
+                    if ($row['stock'] >= 20) {
+                        echo "In stock";
+                    }  else if ($row['stock'] < 20) {
+                        echo "Last " . $row['stock'] . " in stock";
+                    } else {
+                        echo "Not in stock";
+                    }
+                ?>
+            </p> <br>
+            <hr>
+            <ul class="sp-info">
+                <li><?php if ($row['type'] === 'switch') {echo "Top Housing: ";} else if ($row['type'] === 'diy_keyboard') {echo "Case Material: ";} ?><?php echo $row['caseMaterial']; ?></li>
+                <li><?php if ($row['type'] === 'switch') {echo "Bottom Housing: ";} else if ($row['type'] === 'diy_keyboard') {echo "Plate Material: ";} ?><?php echo $row['plateMaterial']; ?></li>
+                <li><?php if ($row['type'] === 'switch') {echo "Color: ";} else if ($row['type'] === 'diy_keyboard') {echo "Color: ";} ?><?php echo $row['color']; ?></li>
+                <li><?php if ($row['type'] === 'switch') {echo "Switches: ";} else if ($row['type'] === 'diy_keyboard') {echo "Switches: ";} ?><?php echo $row['switches']; ?></li>
+                <li><?php if ($row['type'] === 'diy_keyboard') {echo "PCB: ";} ?>Included</li>
+                <li>Accessories: <?php echo $row['accessories']; ?></li>
+            </ul>
             <p class="sp-price" style="font-weight: bold; background-color: blue; padding: 0.5em;">$<?php echo $row['price'];  ?></p>
             <div class="sp-actions">
                 <a href="javascript:history.back()"><i class="fas fa-chevron-left"></i>BACK</a>

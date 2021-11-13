@@ -52,7 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <br />
         <div class="form-buttons">
             <button type="submit" name="login" class="send" value="LOGIN">LOG IN</button>
-            <button type="reset" class="messup">Ooopsie, I forgot my password...</button>
         </div>
     </form>
 </div>

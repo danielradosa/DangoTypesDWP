@@ -52,7 +52,6 @@
         <br />
         <div class="form-buttons">
             <button type="submit" name="login" class="send" value="LOGIN">SIGN UP</button>
-            <button type="reset" class="messup">Reset form, I need to retype my password...</button>
         </div>
     </form>
 </div>

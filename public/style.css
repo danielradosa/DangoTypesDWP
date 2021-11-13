@@ -225,6 +225,12 @@ main {
   margin-left: -2em;
 }
 
+.sp-info li{
+  list-style-type: none; 
+  color: gray;
+  padding-top: 1em;
+}
+
 .sp-name {
   font-size: 3vw;
   color: white;
@@ -237,7 +243,7 @@ main {
   font-size: 1vw;
   color: #666;
   margin-top: 1em;
-  width: 900px;
+  text-align: left;
 }
 
 .sp-price {
@@ -474,7 +480,7 @@ form .form-buttons button {
   padding: 1em;
   margin-bottom: 3em;
   margin-top: 1em;
-  width: 300px;
+  width: 100%;
   transition: 0.3s ease-in;
 }
 
