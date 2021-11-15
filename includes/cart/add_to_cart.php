@@ -13,4 +13,4 @@ if (!in_array($chosenProduct, $_SESSION['cart'])) {
     array_push($_SESSION['cart'], $chosenProduct);
 }
 
-header("Location: shop.php"); 
+header("Location: ../../shop.php"); 

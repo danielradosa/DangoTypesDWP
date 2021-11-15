@@ -35,7 +35,7 @@
             <div class="menu">
                 <a href="shop.php">Shop</a>
                 <a href="cart.php">Cartㅤ<span style="color: blue;">[<?php if (empty($_SESSION['cart'])) { echo '0'; } else { echo count($_SESSION['cart']);}?>]</span></a>
-                <a href="account.php">Account</a>
+                <a href="<?php if (isset($_SESSION['userID'])) {echo "my_account.php";} else {echo "account.php";} ?>">Account</a>
             </div>
             <div class="line"></div>
             <div class="icons">

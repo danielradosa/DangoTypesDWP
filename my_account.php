@@ -1,5 +1,8 @@
 <?php
-session_start();
+if(!isset($_SESSION)) {
+    session_start();
+}
+
 include('includes/db_connect.php');
 include('includes/functions.php');
 $user_data = check_login($conn);
@@ -55,7 +58,7 @@ if (isset($_POST['update'])) {
 
     ?>
 
-    <a href="public/logout.php" style="color: black; font-size: 2em;">Log out</a>
+    <a href="includes/user/logout.php" style="color: black; font-size: 2em;">Log out</a>
 
 </main>
 
@@ -69,7 +72,7 @@ if (isset($_POST['update'])) {
     } else if ($user_data['addressForeign'] === NULL) {
         echo "<p style='text-align: center; font-size: 2em;'>You have no address yet. <br>
         Create one now by clicking here:</p>";
-        echo "<div style='display: flex; margin-top: 3em;'><a href='create_address.php?$currentUserID' 
+        echo "<div style='display: flex; margin-top: 3em;'><a href='includes/user/create_address.php?$currentUserID' 
         style='text-align: center; color: white; background-color: black; font-size: 2em; text-decoration: none; padding: 0.7em;'>ADD ADDRESS</a></div>";
     }
     ?>

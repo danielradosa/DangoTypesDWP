@@ -59,7 +59,7 @@ $relatedSresult = $conn->query($relatedS);
             <p class="sp-price" style="font-weight: bold; background-color: blue; padding: 0.5em;">$<?php echo $row['price'];  ?></p>
             <div class="sp-actions">
                 <a href="javascript:history.back()"><i class="fas fa-chevron-left"></i>BACK</a>
-                <a href="add_to_cart.php?<?php echo $chosenProduct; ?>">ADD TO CART</a>
+                <a href="includes/cart/add_to_cart.php?<?php echo $chosenProduct; ?>">ADD TO CART</a>
             </div>
         </div>
     </div>
@@ -73,7 +73,7 @@ $relatedSresult = $conn->query($relatedS);
                 <h2>"<?php echo $row['title']; ?>"</h2>
                 <div class="sp-actions">
                     <a href="product.php?<?php echo $row['productID']; ?>"><i class="fas fa-chevron-right"></i>VIEW PRODUCT</a>
-                    <a href="add_to_cart.php?<?php echo $row['productID']; ?>">ADD TO CART</a>
+                    <a href="includes/cart/add_to_cart.php?<?php echo $row['productID']; ?>">ADD TO CART</a>
                 </div>
             </div>
         <?php } ?>
@@ -87,7 +87,7 @@ $relatedSresult = $conn->query($relatedS);
                 <h2>"<?php echo $row['title']; ?>"</h2>
                 <div class="sp-actions">
                     <a href="product.php?<?php echo $row['productID']; ?>"><i class="fas fa-chevron-right"></i>VIEW PRODUCT</a>
-                    <a href="add_to_cart.php?<?php echo $row['productID']; ?>">ADD TO CART</a>
+                    <a href="includes/cart/add_to_cart.php?<?php echo $row['productID']; ?>">ADD TO CART</a>
                 </div>
             </div>
         <?php } ?>

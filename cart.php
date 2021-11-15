@@ -46,7 +46,7 @@ if (!empty($_SESSION['cart'])) {
 
         <div class="cart-container">
             <div class="left-cart">
-                <h2><?php echo $row['title']; ?><a href="remove_from_cart.php?<?php echo $row['productID']; ?>" class="remove-btn">REMOVE-X</a></h2>
+                <h2><?php echo $row['title']; ?><a href="includes/cart/remove_from_cart.php?<?php echo $row['productID']; ?>" class="remove-btn">REMOVE-X</a></h2>
                 <p><?php echo $row['description']; ?></p>
                 <span style="color: blue;"><?php echo "$ " . $row['price']; ?></span>
                 <?php echo "<img src=" . 'database/product-images/' . $row['productImage'] . " style='width: 20%; height: 20%;  display: block; margin-top: 1em;

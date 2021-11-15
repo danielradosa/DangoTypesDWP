@@ -6,5 +6,5 @@ if (isset($_SESSION['userID'])) {
     unset($_SESSION['userID']);
 }
 
-header("Location: ../account.php");
+header("Location: ../../account.php");
 die;
