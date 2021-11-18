@@ -3,7 +3,7 @@
 include('../includes/db_connect.php');
 
 $title = $price = $description = $color = $type = '';
-$errors = array('title' => '','price'=>'', 'description' => '', 'color' => '', 'type' => '');
+$errors = array('title' => '', 'price' => '', 'description' => '', 'color' => '', 'type' => '');
 
 if (isset($_POST['submit'])) {
 
@@ -52,13 +52,13 @@ if (isset($_POST['submit'])) {
             }
         }
 
-        $sql = "INSERT INTO product(title, price, description, caseMaterial, plateMaterial, color, switches, `type`, accessories, productImage) 
-                        VALUES ('$title', '$price', '$description', '$caseMaterial', '$plateMaterial', '$color', '$switches', '$type', '$accessories', '$filename')";
-        if (mysqli_query($conn, $sql)) {
-            header('Locaiton: ?succesfully added');
-        } else {
-            echo 'query error: ' . mysqli_errno($conn);
-        }
+        $sql = $conn->prepare("INSERT INTO `product` (title, price, description, caseMaterial, plateMaterial, color, switches, `type`, accessories, productImage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $sql->bind_param('sssssssssb', $title, $price, $description, $caseMaterial, $plateMaterial, $color, $switches, $type, $accessories, $filename);
+        $sql->execute();
+        header('Locaiton: ?succesfully added');
+        die;
+
+        echo 'query error: ' . mysqli_errno($conn);
 
         header("Location: products.php");
     }
