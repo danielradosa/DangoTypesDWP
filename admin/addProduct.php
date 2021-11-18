@@ -38,6 +38,7 @@ if (isset($_POST['submit'])) {
         $switches = mysqli_real_escape_string($conn, $_POST['switches']);
         $type = mysqli_real_escape_string($conn, $_POST['type']);
         $accessories = mysqli_real_escape_string($conn, $_POST['accessories']);
+        $stock = 100;
 
         $filename = $_FILES['image']['name'];
         $imageFileType = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
@@ -46,21 +47,20 @@ if (isset($_POST['submit'])) {
         if (in_array($imageFileType, $extensions_arr)) {
             if (move_uploaded_file($_FILES["image"]["tmp_name"], '../database/product-images/' . $filename)) {
                 echo "image uploaded";
-                header("Location: products.php");
+                //header("Location: products.php");
             } else {
                 echo "error";
             }
         }
 
-        $sql = $conn->prepare("INSERT INTO `product` (title, price, description, caseMaterial, plateMaterial, color, switches, `type`, accessories, productImage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $sql->bind_param('sssssssssb', $title, $price, $description, $caseMaterial, $plateMaterial, $color, $switches, $type, $accessories, $filename);
+        $sql = $conn->prepare("INSERT INTO `product` (title, price, description, caseMaterial, plateMaterial, color, switches, `type`, accessories, productImage, stock) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $sql->bind_param('sisssssssbi', $title, $price, $description, $caseMaterial, $plateMaterial, $color, $switches, $type, $accessories, $filename, $stock);
         $sql->execute();
-        header('Locaiton: ?succesfully added');
-        die;
+        //header('Locaiton: ?succesfully added');
+        echo $title;
 
         echo 'query error: ' . mysqli_errno($conn);
-
-        header("Location: products.php");
+        //header("Location: products.php");
     }
 }
 
