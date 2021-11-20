@@ -1,5 +1,8 @@
 <?php
-session_start();
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
 include('includes/db_connect.php');
 include('includes/functions.php');
 $user_data = check_login($conn);
@@ -55,7 +58,7 @@ if (isset($_POST['update'])) {
 
     ?>
 
-    <a href="public/logout.php" style="color: black; font-size: 2em;">Log out</a>
+    <a href="includes/user/logout.php" style="color: black; font-size: 2em;">Log out</a>
 
 </main>
 

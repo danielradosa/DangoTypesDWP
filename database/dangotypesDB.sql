@@ -61,18 +61,13 @@ CREATE TABLE `order` (
   `orderPostalCode` int NOT NULL,
   `orderNumber` varchar(255) NULL,
   `orderPrice` varchar(255) NULL,
+  `orderStatus` varchar(100) NOT NULL,
   `placedAt` datetime NOT NULL,
   PRIMARY KEY (`orderID`)
 );
 
-CREATE TABLE `orderDetails` (
-  `orderDetailsID` int NOT NULL AUTO_INCREMENT,
-  `orderMail` varchar(255) NOT NULL,
-  `itemsOrdered` varchar(255) NOT NULL,
-  PRIMARY KEY (`orderDetailsID`)
-);
-
 ALTER TABLE `address` ADD CONSTRAINT `fk_user_foreign_1` FOREIGN KEY (`customerForeign`) REFERENCES `user`(`userID`);
 ALTER TABLE `user` ADD CONSTRAINT `fk_user_address_1` FOREIGN KEY (`addressForeign`) REFERENCES `address`(`addrID`);
-ALTER TABLE `orderDetails` ADD CONSTRAINT `fk_user_order_1` FOREIGN KEY (`orderMail`) REFERENCES `order`(`orderMail`);
+ALTER TABLE `order` ADD CONSTRAINT `fk_order_user_1` FOREIGN KEY (`orderNumber`) REFERENCES `user`(`userEmail`);
+ALTER TABLE `user` ADD CONSTRAINT `fk_order_usermail_1` FOREIGN KEY (`userEmail`) REFERENCES `address`(`customerForeign`);
 ALTER TABLE `user` ADD CONSTRAINT UQ_userEmail UNIQUE (userEmail);

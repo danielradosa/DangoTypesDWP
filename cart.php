@@ -4,6 +4,7 @@ if (!isset($_SESSION)) {
 }
 
 include('includes/db_connect.php');
+
 if (!isset($_SERVER['HTTP_REFERER'])) {
     header('location: ../home.php');
     exit;
@@ -54,7 +55,7 @@ if (!empty($_SESSION['cart'])) {
                 <?php
                 error_reporting(0);
                 ini_set('display_errors', 0);
-                    $total += $row['price'];
+                $total += $row['price'];
                 ?>
             </div>
         </div>
@@ -67,14 +68,20 @@ if (!empty($_SESSION['cart'])) {
 <div class="checkout">
     <span>
         <?php
-           if (!empty($_SESSION['cart'])) {
-               echo "Total: $" . $total;
-           }
+        error_reporting(0);
+        ini_set('display_errors', 0);
+        $total += $row['price'];
+        if (!empty($_SESSION['cart'])) {
+            echo "Total: $" . $total;
+        }
         ?>
     </span>
-        <?php if (!empty($_SESSION['cart'])) { ?>
-            <a href='checkout.php?<?php echo $total; ?>' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Checkout</a>
-        <?php } ?>
+    <?php if (isset($_SESSION['userID']) && !empty($_SESSION['cart'])) { ?>
+        <a href='checkout.php?<?php echo $total; ?>' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Checkout</a>
+    <?php } else if (!empty($_SESSION['cart']) && !isset($_SESSION['userID'])) { ?>
+        <a href='login.php' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Login to checkout</a>
+    <?php } ?>
+
 </div>
 
 </body>
