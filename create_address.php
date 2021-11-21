@@ -46,7 +46,7 @@ if (isset($_POST['create'])) {
         } else {
             echo 'query error: ' . mysqli_errno($conn);
         }
-        header("Location: ../../my_account.php");
+        header("Location: my_account.php");
     }
 }
 ?>

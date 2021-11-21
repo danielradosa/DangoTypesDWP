@@ -44,12 +44,13 @@ CREATE TABLE `user`  (
   `userEmail` varchar(255) NOT NULL,
   `userPass` varchar(255) NOT NULL,
   `userType` boolean NOT NULL,
-  `addressForeign` int NULL,
+  `addressForeign` int NOT NULL,
   PRIMARY KEY (`userID`)
 );
 
 CREATE TABLE `order` (
   `orderID` int NOT NULL AUTO_INCREMENT,
+  `orderItems` text NOT NULL,
   `orderMail` varchar(255) NOT NULL,
   `orderName` varchar(255) NOT NULL,
   `orderLastName` varchar(255) NOT NULL,

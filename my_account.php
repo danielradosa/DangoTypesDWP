@@ -92,9 +92,10 @@ if (isset($_POST['update'])) {
             <select type="country" name="countryU" id="countryU" style="width: 300px;"  required>
                 <option value="<?php echo $row['country'] ?>"><?php echo $row['country'] ?></option>
                 <option value="France">France</option>
-                <option value="France">Slovakia</option>
-                <option value="France">Denmark</option>
-                <option value="France">Germany</option>
+                <option value="Slovakia">Slovakia</option>
+                <option value="Denmark">Denmark</option>
+                <option value="Germany">Germany</option>
+                <option value="Italy">Italy</option>
             </select>
             <br>
             <input type="reset" name="clear" value="Clear Fields" style="color: white; background-color: red; float: left; border: none; width: 300px;">
