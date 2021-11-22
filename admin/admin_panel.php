@@ -19,9 +19,10 @@ if (!isset($_SERVER['HTTP_REFERER'])) {
 <h1>Hey admin, what do you want to do today?</h1>
 
 <div class="admin-nav">
-    <span>View: <a href="admin/orders.php">ORDERS</a></span> <br>
-    <span>See: <a href="admin/products.php">PRODUCTS</a></span> <br>
-    <span>Edit: <a href="admin/other.php">OTHERS</a></span>
+    <span>View: <a href="orders.php">ORDERS</a></span> <br>
+    <span>See: <a href="products.php">PRODUCTS</a></span> <br>
+    <span>Edit: <a href="other.php">OTHERS</a></span>
+    <span><a href="../my_account.php">BACK TO MY ACCOUNT</a></span>
 </div>
 
 

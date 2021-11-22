@@ -104,7 +104,7 @@ $result = $conn->query($sql);
 
 <body>
     <h1>All Orders</h1>
-    <span><a href="../admin_panel.php"> <i class="fas fa-chevron-left"></i> BACK TO ADMIN PANEL</a></span><br>
+    <span><a href="admin_panel.php"> <i class="fas fa-chevron-left"></i> BACK TO ADMIN PANEL</a></span><br>
     <span><a href="addProduct.php">CREATE A NEW PRODUCT <i class="fas fa-chevron-right"></i></a></span>
 
     <table>

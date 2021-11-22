@@ -53,7 +53,7 @@ if (isset($_POST['update'])) {
     <?php
 
     if ($user_data['userType'] === '1') {
-        echo "<a href='admin_panel.php' style='color: white; background-color: black; padding: 1em; text-decoration: none;'>ADMIN PANEL</a>";
+        echo "<a href='admin/admin_panel.php' style='color: white; background-color: black; padding: 1em; text-decoration: none;'>ADMIN PANEL</a>";
     }
 
     ?>

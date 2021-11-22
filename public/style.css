@@ -508,4 +508,29 @@ form .form-buttons button {
   color: #ff0000 !important;
 }
 
+@media only screen and (max-width: 1800px) {
+  .linet {
+    width: 600px;
+  }
+  .product {
+    width: 28.5%;
+  }
+  .product-title {
+    width: 310px;
+  }
+}
 
+@media only screen and (max-width: 1400px){
+  .product {
+    width: 27.5%;
+  }
+  .product-title {
+    width: 210px;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .linet {
+    width: 200px;
+  }
+}
