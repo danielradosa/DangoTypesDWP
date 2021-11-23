@@ -53,7 +53,7 @@ if (isset($_POST['submit'])) {
             }
         }
 
-        $sql = $conn->prepare("INSERT INTO `product` (title, price, description, caseMaterial, plateMaterial, color, switches, `type`, accessories, productImage, stock) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $sql = $conn->prepare("INSERT INTO `product` (title, price, description, caseMaterial, plateMaterial, color, switches, `type`, accessories, productImage, dateCreated, stock) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $sql->bind_param('sisssssssbi', $title, $price, $description, $caseMaterial, $plateMaterial, $color, $switches, $type, $accessories, $filename, $stock);
         $sql->execute();
         //header('Locaiton: ?succesfully added');

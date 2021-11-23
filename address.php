@@ -29,7 +29,7 @@ if (isset($_POST['create'])) {
     }
     if (empty($_POST['country'])) {
         echo "Choosing country is required";
-    } 
+    }
     if (!empty($_POST['firstName']) && !empty($_POST['lastName']) && !empty($_POST['phoneNum']) && !empty($_POST['streetName']) && !empty($_POST['streetNum']) && !empty($_POST['postalCode']) && !empty($_POST['country']) && !empty($_POST['city'])) {
         $firstName = mysqli_real_escape_string($conn, $_POST['firstName']);
         $lastName = mysqli_real_escape_string($conn, $_POST['lastName']);
@@ -60,10 +60,10 @@ if (isset($_POST['create'])) {
     <h1>Hello, you are logged in as: <?php echo $user_data['userEmail']; ?></h1>
     <?php
     if ($user_data['userType'] === '1') {
-        echo "<a href='admin_panel.php' style='color: white; background-color: black; padding: 1em; text-decoration: none;'>ADMIN PANEL</a>";
+        echo "<a href='admin/admin_panel.php' style='color: white; background-color: black; padding: 1em; text-decoration: none;'>ADMIN PANEL</a>";
     }
     ?>
-    <a href="public/logout.php" style="color: black; font-size: 2em;">Log out</a>
+    <a href="includes/user/logout.php" style="color: black; font-size: 2em;">Log out</a>
 </main>
 
 <div class="section">

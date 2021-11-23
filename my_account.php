@@ -72,7 +72,7 @@ if (isset($_POST['update'])) {
     } else if ($user_data['addressForeign'] === NULL) {
         echo "<p style='text-align: center; font-size: 2em;'>You have no address yet. <br>
         Create one now by clicking here:</p>";
-        echo "<div style='display: flex; margin-top: 3em;'><a href='create_address.php?$currentUserID' 
+        echo "<div style='display: flex; margin-top: 3em;'><a href='address.php?$currentUserID' 
         style='text-align: center; color: white; background-color: black; font-size: 2em; text-decoration: none; padding: 0.7em;'>ADD ADDRESS</a></div>";
     }
     ?>

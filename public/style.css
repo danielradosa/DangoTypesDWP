@@ -505,7 +505,14 @@ form .form-buttons button {
 }
 
 .error {
-  color: #ff0000 !important;
+  background-color: red; 
+  color: white; 
+  text-align: center; 
+  margin: 0 auto; 
+  padding: 0.5em; 
+  font-size: .9vw; 
+  top: 750px; 
+  position: fixed;
 }
 
 @media only screen and (max-width: 1800px) {

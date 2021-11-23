@@ -72,3 +72,6 @@ ALTER TABLE `user` ADD CONSTRAINT `fk_user_address_1` FOREIGN KEY (`addressForei
 ALTER TABLE `order` ADD CONSTRAINT `fk_order_user_1` FOREIGN KEY (`orderNumber`) REFERENCES `user`(`userEmail`);
 ALTER TABLE `user` ADD CONSTRAINT `fk_order_usermail_1` FOREIGN KEY (`userEmail`) REFERENCES `address`(`customerForeign`);
 ALTER TABLE `user` ADD CONSTRAINT UQ_userEmail UNIQUE (userEmail);
+
+CREATE VIEW switchesCategory AS SELECT * FROM product WHERE `type` = 'switch';
+CREATE VIEW diy_keyboardsCategory AS SELECT * FROM product WHERE `type` = 'diy_keyboard';
