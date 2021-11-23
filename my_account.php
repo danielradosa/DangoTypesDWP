@@ -69,7 +69,7 @@ if (isset($_POST['update'])) {
     if ($addCheck['customerForeign'] !== NULL) {
         echo "<p style='text-align: center; font-size: 2em;'>This is your currently used address. <br>
         If you would like to edit it change inserted values and press Update Address.</p>";
-    } else if ($user_data['addressForeign'] === NULL) {
+    } else {
         echo "<p style='text-align: center; font-size: 2em;'>You have no address yet. <br>
         Create one now by clicking here:</p>";
         echo "<div style='display: flex; margin-top: 3em;'><a href='address.php?$currentUserID' 
