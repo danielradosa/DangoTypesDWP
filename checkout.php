@@ -12,6 +12,18 @@ $result = $conn->query($sql);
 $sql2 = "SELECT userEmail FROM `user` WHERE userID = $userAdd";
 $result2 = $conn->query($sql2);
 
+
+if (!empty($_SESSION['cart'])) {
+    $ids = "";
+    foreach ($_SESSION['cart'] as $id) {
+        $ids = $ids . $id . ",";
+    }
+    $ids = rtrim($ids, ',');
+
+    $cartQuery = "SELECT * FROM `product` WHERE productID IN (" . implode(',', $_SESSION['cart']) . ") ";
+    $resultCart = $conn->query($cartQuery);
+}
+
 if (isset($_POST["order"])) {
     if (empty($_POST['orderNameA'])) {
         echo "First name is required";
@@ -49,12 +61,13 @@ if (isset($_POST["order"])) {
         $orderCity = mysqli_real_escape_string($conn, $_POST['orderCityA']);
         $orderPostalCode = mysqli_real_escape_string($conn, $_POST['orderPostalCodeA']);
         $order_number = rand(1000, 9999);
-        $priceToPay = $_SERVER['QUERY_STRING'];
+        $priceToPay = '$'.$_SERVER['QUERY_STRING'];
         $defaultStatus = 'accepted';
-        $itemsOrdered = $_SESSION['cart'];
+        $placedAt = date("Y-m-d H:i:s");   
 
-        $sqlOrder = "INSERT INTO `order`(orderItems, orderMail, orderName, orderLastName, orderPhoneNum, orderStreetName, orderStreetNum, orderCountry, orderCity, orderPostalCode, orderNumber, orderPrice, orderStatus) 
-                VALUES ('$itemsOrdered', '$orderMail', '$orderName', '$orderLastName', '$orderPhoneNum', '$orderStreetName', '$orderStreetNum', '$orderCountry, '$orderCity', '$orderPostalCode', '$order_number', '$priceToPay', '$defaultStatus')";
+        $sqlOrder = "INSERT INTO `order`(`orderItems`, `orderMail`, `orderName`, `orderLastName`, `orderPhoneNum`, `orderStreetName`, `orderStreetNum`, `orderCountry`, `orderCity`, `orderPostalCode`, `orderNumber`, `orderPrice`, `orderStatus`, `placedAt`) 
+                VALUES ('$resultCart', '$orderMail', '$orderName', '$orderLastName', '$orderPhoneNum', '$orderStreetName', '$orderStreetNum', '$orderCountry', '$orderCity', '$orderPostalCode', '$order_number', '$priceToPay', '$defaultStatus', '$placedAt')";
+        echo $sqlOrder;
         if (mysqli_query($conn, $sqlOrder)) {
             header('Location: ?succesfully ordered');
         } else {
@@ -94,8 +107,7 @@ if (isset($_POST["order"])) {
             <option value="<?php echo $row['country']; ?>"><?php echo $row['country']; ?></option>
         </select>
         <br>
-        <input type="reset" name="reset" value="Reset Form" style="color: red; border: none; cursor: pointer;">
-        <input type="submit" name="order" value="Order Now" style="color: white; background-color: blue;">
+        <input type="submit" name="order" value="Order Now" style="color: white; background-color: blue; display: flex; justify-content: center;">
     </form>
     </div>
 </div>
