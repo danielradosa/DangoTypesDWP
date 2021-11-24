@@ -6,8 +6,7 @@ if (!isset($_SERVER['HTTP_REFERER'])) {
     exit;
 }
 
-$sql = "SELECT `order`.`orderID`,  `order`.orderNumber, `orderdetails`.itemsOrdered, `order`.orderMail, `order`.`orderLastName`, `order`.`orderPhoneNum`, `order`.`orderPrice` 
-FROM `order` INNER JOIN orderdetails ON `order`.`orderMail`= orderdetails.orderMail";
+$sql = "SELECT * FROM `order`";
 $result = $conn->query($sql);
 ?>
 
@@ -105,7 +104,6 @@ $result = $conn->query($sql);
 <body>
     <h1>All Orders</h1>
     <span><a href="admin_panel.php"> <i class="fas fa-chevron-left"></i> BACK TO ADMIN PANEL</a></span><br>
-    <span><a href="addProduct.php">CREATE A NEW PRODUCT <i class="fas fa-chevron-right"></i></a></span>
 
     <table>
         <thead>
@@ -116,13 +114,14 @@ $result = $conn->query($sql);
                 <th scope="col">Customer Last Name</th>
                 <th scope="col">Customer Phone</th>
                 <th scope="col">Total Price</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
             <?php while ($row = $result->fetch_assoc()) { ?>
                 <tr>
                     <td style="font-weight: bold;"><?php echo $row['orderNumber'] ?></td>
-                    <td><?php echo  $row['itemsOrdered'] ?></td>
+                    <td><?php echo  $row['orderItems'] ?></td>
                     <td><?php echo  $row['orderMail'] ?></td>
                     <td><?php echo  $row['orderLastName'] ?></td>
                     <td><?php echo  $row['orderPhoneNum'] ?></td>
@@ -133,7 +132,7 @@ $result = $conn->query($sql);
                             <div class="edit">
                             <input type="hidden" name="id_to_delete" value="<?php echo $row['orderID']; ?>">
                             <input type="hidden" name="id_to_update" value="<?php echo $row['orderID']; ?>">
-                            <input type="submit" name="delete" value="Delete" style="color: red;">
+                            <input type="submit" name="delete" value="Cancel" style="color: red;">
                             </div>
                         </form> <br>
                     </td>

@@ -60,8 +60,8 @@ CREATE TABLE `order` (
   `orderCountry` varchar(255) NOT NULL,
   `orderCity` varchar(255) NOT NULL,
   `orderPostalCode` int NOT NULL,
-  `orderNumber` varchar(255) NULL,
-  `orderPrice` varchar(255) NULL,
+  `orderNumber` int NOT NULL,
+  `orderPrice` varchar(255) NOT NULL,
   `orderStatus` varchar(100) NOT NULL,
   `placedAt` datetime NOT NULL,
   PRIMARY KEY (`orderID`)
