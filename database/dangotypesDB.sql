@@ -62,7 +62,7 @@ CREATE TABLE `order` (
   `orderPostalCode` int NOT NULL,
   `orderNumber` int NOT NULL,
   `orderPrice` varchar(255) NOT NULL,
-  `orderStatus` varchar(100) NOT NULL,
+  `orderStatus` varchar(255) NOT NULL,
   `placedAt` datetime NOT NULL,
   PRIMARY KEY (`orderID`)
 );

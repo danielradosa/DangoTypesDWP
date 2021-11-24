@@ -7,22 +7,16 @@ include('includes/db_connect.php');
 
 $userAdd = $_SESSION['userID'];
 
+if (isset($_GET['total'])) {
+    $_SESSION['price'] = $_GET['total'];
+}
+
+$totalPrice = '$'.$_SESSION['price'];
+
 $sql = "SELECT * FROM address WHERE addrID = $userAdd";
 $result = $conn->query($sql);
 $sql2 = "SELECT userEmail FROM `user` WHERE userID = $userAdd";
 $result2 = $conn->query($sql2);
-
-
-if (!empty($_SESSION['cart'])) {
-    $ids = "";
-    foreach ($_SESSION['cart'] as $id) {
-        $ids = $ids . $id . ",";
-    }
-    $ids = rtrim($ids, ',');
-
-    $cartQuery = "SELECT * FROM `product` WHERE productID IN (" . implode(',', $_SESSION['cart']) . ") ";
-    $resultCart = $conn->query($cartQuery);
-}
 
 if (isset($_POST["order"])) {
     if (empty($_POST['orderNameA'])) {
@@ -61,19 +55,17 @@ if (isset($_POST["order"])) {
         $orderCity = mysqli_real_escape_string($conn, $_POST['orderCityA']);
         $orderPostalCode = mysqli_real_escape_string($conn, $_POST['orderPostalCodeA']);
         $order_number = rand(1000, 9999);
-        $priceToPay = '$'.$_SERVER['QUERY_STRING'];
         $defaultStatus = 'accepted';
         $placedAt = date("Y-m-d H:i:s");   
 
         $sqlOrder = "INSERT INTO `order`(`orderItems`, `orderMail`, `orderName`, `orderLastName`, `orderPhoneNum`, `orderStreetName`, `orderStreetNum`, `orderCountry`, `orderCity`, `orderPostalCode`, `orderNumber`, `orderPrice`, `orderStatus`, `placedAt`) 
-                VALUES ('$resultCart', '$orderMail', '$orderName', '$orderLastName', '$orderPhoneNum', '$orderStreetName', '$orderStreetNum', '$orderCountry', '$orderCity', '$orderPostalCode', '$order_number', '$priceToPay', '$defaultStatus', '$placedAt')";
-        echo $sqlOrder;
+                VALUES ('items', '$orderMail', '$orderName', '$orderLastName', '$orderPhoneNum', '$orderStreetName', '$orderStreetNum', '$orderCountry', '$orderCity', '$orderPostalCode', '$order_number', '$totalPrice', '$defaultStatus', '$placedAt')";
         if (mysqli_query($conn, $sqlOrder)) {
             header('Location: ?succesfully ordered');
         } else {
             echo 'query error: ' . mysqli_errno($conn);
         }
-        header("Location: ?order $order_number complete");
+        header("Location: checkoutComplete.php?order $order_number complete");
     }
 }
 ?>
@@ -103,7 +95,7 @@ if (isset($_POST["order"])) {
         <br>
         <input type="number" placeholder="Postal Code: xxxxx" name="orderPostalCodeA" style="width: 300px;" value="<?php echo $row['postalCode']; ?>" required>
         <input type="city" placeholder="City" name="orderCityA" style="width: 300px;" value="<?php echo $row['city']; ?>" required>
-        <select type="country" name="orderCountryA" id="country" style="width: 300px;"  required disabled>
+        <select type="country" name="orderCountryA" id="country" style="width: 300px;"  required>
             <option value="<?php echo $row['country']; ?>"><?php echo $row['country']; ?></option>
         </select>
         <br>
