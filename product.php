@@ -17,12 +17,14 @@
             <p class="sp-description">
                 <?php 
                     if ($row['stock'] >= 20) {
-                        echo "In stock";
-                    }  else if ($row['stock'] < 20) {
-                        echo "Last " . $row['stock'] . " in stock";
-                    } else {
-                        echo "Not in stock";
+                        echo "In stock"; 
+                    } 
+                    else if ($row['stock'] <= 0) {
+                        echo "Out of stock";
                     }
+                    else if ($row['stock'] <= 20) {
+                        echo "Last " . $row['stock'] . " in stock";
+                    } 
                 ?>
             </p> <br>
             <hr>
@@ -37,7 +39,11 @@
             <p class="sp-price" style="font-weight: bold; background-color: blue; padding: 0.5em;">$<?php echo $row['price'];  ?></p>
             <div class="sp-actions">
                 <a href="javascript:history.back()"><i class="fas fa-chevron-left"></i>BACK</a>
-                <a href="includes/cart/add_to_cart.php?<?php echo $chosenProduct; ?>">ADD TO CART</a>
+                <?php if ($row['stock'] >= 1) { ?>
+                    <a href="includes/cart/add_to_cart.php?<?php echo $chosenProduct; ?>">ADD TO CART</a>
+                <?php } else { ?>
+                    <a href="includes/cart/add_to_cart.php?<?php echo $chosenProduct; ?>" onclick="return false;" style="cursor: not-allowed;">ADD TO CART</a>
+                <?php } ?>
             </div>
         </div>
     </div>
