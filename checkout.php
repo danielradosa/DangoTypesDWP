@@ -5,8 +5,6 @@ if (!isset($_SESSION)) {
 
 include('includes/db_connect.php');
 
-$priceToPay = $_SERVER['QUERY_STRING'];
-$itemsOrdered = $_SESSION['cart'];
 $userAdd = $_SESSION['userID'];
 
 $sql = "SELECT * FROM address WHERE addrID = $userAdd";
@@ -15,46 +13,49 @@ $sql2 = "SELECT userEmail FROM `user` WHERE userID = $userAdd";
 $result2 = $conn->query($sql2);
 
 if (isset($_POST["order"])) {
-    if (empty($_POST['orderName'])) {
+    if (empty($_POST['orderNameA'])) {
         echo "First name is required";
     }
-    if (empty($_POST['orderLastName'])) {
+    if (empty($_POST['orderLastNameA'])) {
         echo "Last name is required";
     }
-    if (empty($_POST['orderMail'])) {
+    if (empty($_POST['orderMailA'])) {
         echo "Mail is required";
     }
-    if (empty($_POST['orderPhoneNum'])) {
+    if (empty($_POST['orderPhoneNumA'])) {
         echo "Phone is required";
     }
-    if (empty($_POST['orderStreetName'])) {
+    if (empty($_POST['orderStreetNameA'])) {
         echo "Street name is required";
     }
-    if (empty($_POST['orderStreetNum'])) {
+    if (empty($_POST['orderStreetNumA'])) {
         echo "Street number is required";
     }
-    if (empty($_POST['orderPostalCode'])) {
+    if (empty($_POST['orderPostalCodeA'])) {
         echo "Postal code is required";
     }
-    if (empty($_POST['orderCity'])) {
+    if (empty($_POST['orderCityA'])) {
         echo "City is required";
     } 
-    if (!empty($_POST['orderName']) && !empty($_POST['orderLastName']) && !empty($_POST['orderMail']) && !empty($_POST['orderPhoneNum']) && !empty($_POST['orderStreetName']) 
-    && !empty($_POST['orderStreetNum']) && !empty($_POST['orderPostalCode']) && !empty($_POST['orderCity']) && !empty($_POST['orderCountry'])) {
-        $orderMail = mysqli_real_escape_string($conn, $_POST['orderMail']);
-        $orderName = mysqli_real_escape_string($conn, $_POST['orderName']);
-        $orderLastName = mysqli_real_escape_string($conn, $_POST['orderLastName']);
-        $orderPhoneNum = mysqli_real_escape_string($conn, $_POST['orderPhoneNum']);
-        $orderStreetName = mysqli_real_escape_string($conn, $_POST['orderStreetName']);
-        $orderStreetNum = mysqli_real_escape_string($conn, $_POST['orderStreetNum']);
-        $orderCountry = mysqli_real_escape_string($conn, $_POST['orderCountry']);
-        $orderCity = mysqli_real_escape_string($conn, $_POST['orderCity']);
-        $orderPostalCode = mysqli_real_escape_string($conn, $_POST['orderPostalCode']);
+    if (!empty($_POST['orderNameA']) && !empty($_POST['orderLastNameA']) && !empty($_POST['orderMailA']) && !empty($_POST['orderPhoneNumA']) && !empty($_POST['orderStreetNameA']) 
+    && !empty($_POST['orderStreetNumA']) && !empty($_POST['orderPostalCodeA']) && !empty($_POST['orderCityA']) && !empty($_POST['orderCountryA'])) {
+        $orderMail = mysqli_real_escape_string($conn, $_POST['orderMailA']);
+        $orderName = mysqli_real_escape_string($conn, $_POST['orderNameA']);
+        $orderLastName = mysqli_real_escape_string($conn, $_POST['orderLastNameA']);
+        $orderPhoneNum = mysqli_real_escape_string($conn, $_POST['orderPhoneNumA']);
+        $orderStreetName = mysqli_real_escape_string($conn, $_POST['orderStreetNameA']);
+        $orderStreetNum = mysqli_real_escape_string($conn, $_POST['orderStreetNumA']);
+        $orderCountry = mysqli_real_escape_string($conn, $_POST['orderCountryA']);
+        $orderCity = mysqli_real_escape_string($conn, $_POST['orderCityA']);
+        $orderPostalCode = mysqli_real_escape_string($conn, $_POST['orderPostalCodeA']);
         $order_number = rand(1000, 9999);
+        $priceToPay = $_SERVER['QUERY_STRING'];
+        $defaultStatus = 'accepted';
+        $itemsOrdered = $_SESSION['cart'];
 
-        $sql = "INSERT INTO `order`(orderMail, orderName, orderLastName, orderPhoneNum, orderStreetName, orderStreetNum, orderCountry, orderCity, orderPostalCode, orderNumber, orderPrice) 
-                VALUES ('$orderMail', '$orderName', '$orderLastName', '$orderPhoneNum', '$orderStreetName', '$orderStreetNum', '$orderCountry, '$orderCity', '$orderPostalCode', '$order_number', '$priceToPay')";
-        if (mysqli_query($conn, $sql)) {
+        $sqlOrder = "INSERT INTO `order`(orderItems, orderMail, orderName, orderLastName, orderPhoneNum, orderStreetName, orderStreetNum, orderCountry, orderCity, orderPostalCode, orderNumber, orderPrice, orderStatus) 
+                VALUES ('$itemsOrdered', '$orderMail', '$orderName', '$orderLastName', '$orderPhoneNum', '$orderStreetName', '$orderStreetNum', '$orderCountry, '$orderCity', '$orderPostalCode', '$order_number', '$priceToPay', '$defaultStatus')";
+        if (mysqli_query($conn, $sqlOrder)) {
             header('Location: ?succesfully ordered');
         } else {
             echo 'query error: ' . mysqli_errno($conn);
@@ -76,20 +77,20 @@ if (isset($_POST["order"])) {
     
 <div class="section">
 <div style="display: flex;">
-    <form action="" method="POST">
-        <input type="text" placeholder="First Name" name="orderName" style="width: 360px;" value="<?php echo $row['firstName']; ?>" required>
-        <input type="text" placeholder="Last Name" name="orderLastName" style="width: 360px;" value="<?php echo $row['lastName']; ?>" required>
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+        <input type="text" placeholder="First Name" name="orderNameA" style="width: 360px;" value="<?php echo $row['firstName']; ?>" required>
+        <input type="text" placeholder="Last Name" name="orderLastNameA" style="width: 360px;" value="<?php echo $row['lastName']; ?>" required>
         <?php while ($row2 = $result2->fetch_assoc()) { ?>
-        <input type="text" placeholder="Your E-mail" name="orderMail" style="width: 360px;" value="<?php echo $row2['userEmail']; ?>" required>
+        <input type="text" placeholder="Your E-mail" name="orderMailA" style="width: 360px;" value="<?php echo $row2['userEmail']; ?>" required>
         <?php } ?>
         <br>
-        <input type="tel" pattern="^[0-9-+\s()]*$" placeholder="Phone +xxxxxxxxx" name="orderPhoneNum" style="width: 360px;" value="<?php echo $row['phoneNum']; ?>" required>
-        <input type="street" placeholder="Street Name" name="orderStreetName" style="width: 300px;" value="<?php echo $row['streetName']; ?>" required>
-        <input type="text" placeholder="Street Number" name="orderStreetNum" style="width: 300px;" value="<?php echo $row['streetNum']; ?>" required>
+        <input type="tel" pattern="^[0-9-+\s()]*$" placeholder="Phone +xxxxxxxxx" name="orderPhoneNumA" style="width: 360px;" value="<?php echo $row['phoneNum']; ?>" required>
+        <input type="street" placeholder="Street Name" name="orderStreetNameA" style="width: 300px;" value="<?php echo $row['streetName']; ?>" required>
+        <input type="text" placeholder="Street Number" name="orderStreetNumA" style="width: 300px;" value="<?php echo $row['streetNum']; ?>" required>
         <br>
-        <input type="number" placeholder="Postal Code: xxxxx" name="orderPostalCode" style="width: 300px;" value="<?php echo $row['postalCode']; ?>" required>
-        <input type="city" placeholder="City" name="orderCity" style="width: 300px;" value="<?php echo $row['city']; ?>" required>
-        <select type="country" name="orderCountry" id="country" style="width: 300px;"  required disabled>
+        <input type="number" placeholder="Postal Code: xxxxx" name="orderPostalCodeA" style="width: 300px;" value="<?php echo $row['postalCode']; ?>" required>
+        <input type="city" placeholder="City" name="orderCityA" style="width: 300px;" value="<?php echo $row['city']; ?>" required>
+        <select type="country" name="orderCountryA" id="country" style="width: 300px;"  required disabled>
             <option value="<?php echo $row['country']; ?>"><?php echo $row['country']; ?></option>
         </select>
         <br>

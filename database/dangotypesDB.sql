@@ -67,6 +67,14 @@ CREATE TABLE `order` (
   PRIMARY KEY (`orderID`)
 );
 
+CREATE TABLE `messages` (
+  `messageID` int NOT NULL AUTO_INCREMENT,
+  `companyDescription` text NULL,
+  `contactNumber` varchar(255) NULL,
+);
+
+INSERT INTO `messages` (companyDescription, contactNumber) VALUES ("Dangotypes is an online webshop focused on selling mechanical keyboards and its accessories.", "220-555-1376");
+
 ALTER TABLE `address` ADD CONSTRAINT `fk_user_foreign_1` FOREIGN KEY (`customerForeign`) REFERENCES `user`(`userID`);
 ALTER TABLE `user` ADD CONSTRAINT `fk_user_address_1` FOREIGN KEY (`addressForeign`) REFERENCES `address`(`addrID`);
 ALTER TABLE `order` ADD CONSTRAINT `fk_order_user_1` FOREIGN KEY (`orderNumber`) REFERENCES `user`(`userEmail`);
