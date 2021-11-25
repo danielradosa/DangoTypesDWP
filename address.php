@@ -40,13 +40,13 @@ if (isset($_POST['create'])) {
         $city = mysqli_real_escape_string($conn, $_POST['city']);
         $country = mysqli_real_escape_string($conn, $_POST['country']);
 
-        $sql = "INSERT INTO address(firstName, lastName, phoneNum, streetName, streetNum, country, city, postalCode, customerForeign) VALUES ('$firstName', '$lastName', '$phoneNum', '$streetName', '$streetNum', '$country', '$city', '$postalCode', '$id_to_create')";
-        if (mysqli_query($conn, $sql)) {
-            header('Location: ?succesfully created');
-        } else {
-            echo 'query error: ' . mysqli_errno($conn);
-        }
+        $sql = $conn->prepare("INSERT INTO address(firstName, lastName, phoneNum, streetName, streetNum, country, city, postalCode, customerForeign) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $sql->bind_param('sssssssii', $firstName, $lastName, $phoneNum, $streetName, $streetNum, $country, $city, $postalCode, $id_to_create);
+        $sql->execute();
         header("Location: my_account.php");
+        die;
+    } else {
+        echo 'query error: ' . mysqli_errno($conn);
     }
 }
 ?>

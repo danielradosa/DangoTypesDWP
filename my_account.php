@@ -28,16 +28,13 @@ if (isset($_POST['update'])) {
         $city = mysqli_real_escape_string($conn, $_POST['cityU']);
         $country = mysqli_real_escape_string($conn, $_POST['countryU']);
 
-        $updateQuery = "UPDATE `address` SET `firstName` = '$firstName', `lastName` = '$lastName', `phoneNum` = '$phoneNum', `streetName` = '$streetName', `streetNum` = '$streetNum', `country` = '$country', `city` = '$city', `postalCode` = '$postalCode' 
-        WHERE `customerForeign` = $currentUserID";
-
-        $updateResult = mysqli_query($conn, $updateQuery);
-        if ($updateResult) {
-            header('Location: ?succesfully updated');
-        } else {
-            echo 'query error: ' . mysqli_errno($conn);
-        }
-        header("Location: account.php");
+        $updateQuery = $conn->prepare("UPDATE `address` SET `firstName` = ?, `lastName` = ?, `phoneNum` = ?, `streetName` = ?, `streetNum` = ?, `country` = ?, `city` = ?, `postalCode` = ? WHERE `customerForeign` = ?");
+        $updateQuery->bind_param('sssssssii', $firstName, $lastName, $phoneNum, $streetName, $streetNum, $country, $city, $postalCode, $currentUserID);
+        $updateQuery->execute();
+        header("Location: ?succesfully updated.php");
+        die;
+    } else {
+        echo 'query error: ' . mysqli_errno($conn);
     }
 }
 ?>
