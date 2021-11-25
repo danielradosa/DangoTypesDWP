@@ -1,4 +1,6 @@
-<?php include('includes/cart/components/cartGrabber.php'); ?>
+<?php
+include('includes/cart/components/cartGrabber.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,8 +22,9 @@ if (empty($_SESSION['cart'])) {
 
 <?php
 if (!empty($_SESSION['cart'])) {
-    while ($row = $result->fetch_assoc()) {
-
+    while ($row = $resultCart->fetch_assoc()) {
+    $itemTitle = ''; 
+    $itemTitle .= $row['title'];
 ?>
 
         <div class="cart-container">
@@ -55,8 +58,11 @@ if (!empty($_SESSION['cart'])) {
         }
         ?>
     </span>
+
+
     <?php if (isset($_SESSION['userID']) && !empty($_SESSION['cart'])) { ?>
-        <a href='checkout.php?total=<?php echo $total; ?>' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Checkout</a>
+        <a href='checkout.php?total=<?php echo $total; ?> items=<?php echo $itemTitle; ?>' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Checkout</a>
+
     <?php } else if (!empty($_SESSION['cart']) && !isset($_SESSION['userID'])) { ?>
         <a href='account.php' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Login to checkout</a>
     <?php } ?>

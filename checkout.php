@@ -7,8 +7,9 @@ include('includes/db_connect.php');
 
 $userAdd = $_SESSION['userID'];
 
-if (isset($_GET['total'])) {
+if (isset($_GET['total']) && isset($_GET['items'])) {
     $_SESSION['price'] = $_GET['total'];
+    $_SESSION['items'] = $_GET['items'];
 }
 
 $totalPrice = '$'.$_SESSION['price'];

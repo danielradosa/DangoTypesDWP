@@ -18,5 +18,5 @@ if (!empty($_SESSION['cart'])) {
     $ids = rtrim($ids, ',');
 
     $cartQuery = "SELECT * FROM `product` WHERE productID IN (" . implode(',', $_SESSION['cart']) . ") ";
-    $result = $conn->query($cartQuery);
+    $resultCart = $conn->query($cartQuery);
 }
