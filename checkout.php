@@ -9,9 +9,10 @@ $userAdd = $_SESSION['userID'];
 
 if (isset($_GET['total']) && isset($_GET['items'])) {
     $_SESSION['price'] = $_GET['total'];
-    $_SESSION['items'] = $_GET['items'];
+    $_SESSION['checkout'] = $_GET['items'];
 }
 
+$chItems = $_SESSION['checkout'];
 $totalPrice = '$'.$_SESSION['price'];
 
 $sql = "SELECT * FROM address WHERE addrID = $userAdd";
@@ -60,13 +61,15 @@ if (isset($_POST["order"])) {
         $placedAt = date("Y-m-d H:i:s");   
 
         $sqlOrder = "INSERT INTO `order`(`orderItems`, `orderMail`, `orderName`, `orderLastName`, `orderPhoneNum`, `orderStreetName`, `orderStreetNum`, `orderCountry`, `orderCity`, `orderPostalCode`, `orderNumber`, `orderPrice`, `orderStatus`, `placedAt`) 
-                VALUES ('items', '$orderMail', '$orderName', '$orderLastName', '$orderPhoneNum', '$orderStreetName', '$orderStreetNum', '$orderCountry', '$orderCity', '$orderPostalCode', '$order_number', '$totalPrice', '$defaultStatus', '$placedAt')";
+                VALUES ('$chItems', '$orderMail', '$orderName', '$orderLastName', '$orderPhoneNum', '$orderStreetName', '$orderStreetNum', '$orderCountry', '$orderCity', '$orderPostalCode', '$order_number', '$totalPrice', '$defaultStatus', '$placedAt')";
         if (mysqli_query($conn, $sqlOrder)) {
             header('Location: ?succesfully ordered');
         } else {
             echo 'query error: ' . mysqli_errno($conn);
         }
-        header("Location: checkoutComplete.php?order $order_number complete");
+        header("Location: checkoutComplete.php?order=$order_number");
+        unset($_SESSION['cart']);
+        
     }
 }
 ?>

@@ -23,8 +23,9 @@ if (empty($_SESSION['cart'])) {
 <?php
 if (!empty($_SESSION['cart'])) {
     while ($row = $resultCart->fetch_assoc()) {
-    $itemTitle = ''; 
-    $itemTitle .= $row['title'];
+        error_reporting(0);
+        ini_set('display_errors', 0);
+        $itemTitle .= $row['title'] . ' ';
 ?>
 
         <div class="cart-container">
@@ -61,7 +62,7 @@ if (!empty($_SESSION['cart'])) {
 
 
     <?php if (isset($_SESSION['userID']) && !empty($_SESSION['cart'])) { ?>
-        <a href='checkout.php?total=<?php echo $total; ?> items=<?php echo $itemTitle; ?>' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Checkout</a>
+        <a href='checkout.php?total=<?php echo $total; ?>&items=<?php echo $itemTitle; ?>' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Checkout</a>
 
     <?php } else if (!empty($_SESSION['cart']) && !isset($_SESSION['userID'])) { ?>
         <a href='account.php' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Login to checkout</a>
