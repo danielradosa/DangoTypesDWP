@@ -1,6 +1,6 @@
 <?php
 
-include('../includes/db_connect.php');
+include('../../includes/db_connect.php');
 
 $title = $price = $description = $color = $type = '';
 $errors = array('title' => '', 'price' => '', 'description' => '', 'color' => '', 'type' => '');

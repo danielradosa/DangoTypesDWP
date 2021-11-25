@@ -1,6 +1,6 @@
 <?php
 
-include('../includes/db_connect.php');
+include('../../includes/db_connect.php');
 
 if (!isset($_SERVER['HTTP_REFERER'])) {
     header('location: ../home.php');
