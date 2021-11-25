@@ -34,7 +34,7 @@ if (isset($_POST['update'])) {
         header("Location: ?succesfully updated.php");
         die;
     } else {
-        echo 'query error: ' . mysqli_errno($conn);
+        echo 'query error: ' . mysqli_error($conn);
     }
 }
 ?>
@@ -80,7 +80,7 @@ if (isset($_POST['update'])) {
             <input type="text" placeholder="First Name" name="firstNameU" style="width: 360px;" value="<?php echo $row['firstName'] ?>" required>
             <input type="text" placeholder="Last Name" name="lastNameU" style="width: 360px;" value="<?php echo $row['lastName'] ?>" required>
             <br>
-            <input type="tel" pattern="^[0-9-+\s()]*$" placeholder="Phone +xxxxxxxxx" name="phoneNum" style="width: 360px;" value="<?php echo $row['phoneNum'] ?>" required>
+            <input type="tel" pattern="^[0-9-+\s()]*$" placeholder="Phone +xxxxxxxxx" name="phoneNumU" style="width: 360px;" value="<?php echo $row['phoneNum'] ?>" required>
             <input type="street" placeholder="Street Name" name="streetNameU" style="width: 300px;" value="<?php echo $row['streetName'] ?>"  required>
             <input type="text" placeholder="Street Number" name="streetNumU" style="width: 300px;" value="<?php echo $row['streetNum'] ?>"  required>
             <br>
