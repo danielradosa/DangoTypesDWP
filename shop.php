@@ -20,7 +20,6 @@
     <h3 class="most-popular">🌟 All Products 🌟</h3>
 
     <div class="product-view">
-
         <?php while ($row = $result->fetch_assoc()) { ?>
             <div class="product">
                 <a href="<?php echo 'product.php' . '?' . $row['productID']; ?>" class="">
@@ -33,7 +32,6 @@
                 <h5 class="product-price">$ <?php echo $row['price'] ?></h5>
             </div>
         <?php } ?>
-
     </div>
 
     <div class="pagination">
