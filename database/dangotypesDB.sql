@@ -71,6 +71,7 @@ CREATE TABLE `messages` (
   `messageID` int NOT NULL AUTO_INCREMENT,
   `companyDescription` text NULL,
   `contactNumber` varchar(255) NULL,
+  PRIMARY KEY (`messageID`)
 );
 
 INSERT INTO `messages` (companyDescription, contactNumber) VALUES ("Dangotypes is an online webshop focused on selling mechanical keyboards and its accessories.", "220-555-1376");

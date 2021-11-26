@@ -60,16 +60,16 @@ if (isset($_POST["order"])) {
         $defaultStatus = 'accepted';
         $placedAt = date("Y-m-d H:i:s");   
 
-        $sqlOrder = "INSERT INTO `order`(`orderItems`, `orderMail`, `orderName`, `orderLastName`, `orderPhoneNum`, `orderStreetName`, `orderStreetNum`, `orderCountry`, `orderCity`, `orderPostalCode`, `orderNumber`, `orderPrice`, `orderStatus`, `placedAt`) 
-                VALUES ('$chItems', '$orderMail', '$orderName', '$orderLastName', '$orderPhoneNum', '$orderStreetName', '$orderStreetNum', '$orderCountry', '$orderCity', '$orderPostalCode', '$order_number', '$totalPrice', '$defaultStatus', '$placedAt')";
-        if (mysqli_query($conn, $sqlOrder)) {
-            header('Location: ?succesfully ordered');
-        } else {
-            echo 'query error: ' . mysqli_errno($conn);
-        }
+        $orderQuery = "INSERT INTO `order`(`orderItems`, `orderMail`, `orderName`, `orderLastName`, `orderPhoneNum`, `orderStreetName`, `orderStreetNum`, `orderCountry`, `orderCity`, `orderPostalCode`, `orderNumber`, `orderPrice`, `orderStatus`, `placedAt`) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sqlOrder = $conn->prepare($orderQuery);
+        $sqlOrder->bind_param('sssssssssiisss', $chItems, $orderMail, $orderName, $orderLastName, $orderPhoneNum, $orderStreetName, $orderStreetNum, $orderCountry, $orderCity, $orderPostalCode, $order_number, $totalPrice, $defaultStatus, $placedAt);
+        $sqlOrder->execute();
         header("Location: checkoutComplete.php?order=$order_number");
-        unset($_SESSION['cart']);
-        
+        unset($_SESSION['cart']);  
+        die;
+    } else {
+        echo 'query error: ' . mysqli_error($conn);
     }
 }
 ?>
