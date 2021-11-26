@@ -80,7 +80,7 @@ if (isset($_POST["order"])) {
 <?php include('public/header.php'); ?>
 
 <h1 style='padding-top: 2em; padding-bottom: .3em; text-align: center; font-size: 4.1vw;'>ORDER BELOW</h1>
-<h2 style='text-align: center; font-size: 1.9vw;'>Fill Out Your Address</h2>
+<h2 style='text-align: center; font-size: 1.9vw;'>Your address:</h2>
 
 <?php while ($row = $result->fetch_assoc()) { ?>
     
@@ -107,6 +107,7 @@ if (isset($_POST["order"])) {
     </form>
     </div>
 </div>
+
 <?php } ?>
 
 

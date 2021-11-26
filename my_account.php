@@ -68,7 +68,7 @@ if (isset($_POST['update'])) {
         If you would like to edit it change inserted values and press Update Address.</p>";
     } else {
         echo "<p style='text-align: center; font-size: 2em;'>You have no address yet. <br>
-        Create one now by clicking here:</p>";
+        Create one now by clicking here otherwise you won't be able to check out:</p>";
         echo "<div style='display: flex; margin-top: 3em;'><a href='address.php?$currentUserID' 
         style='text-align: center; color: white; background-color: black; font-size: 2em; text-decoration: none; padding: 0.7em;'>ADD ADDRESS</a></div>";
     }
