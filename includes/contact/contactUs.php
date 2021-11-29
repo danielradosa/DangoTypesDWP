@@ -2,6 +2,9 @@
 $fullName = $customerEmail =  $message = '';
 $errors = array('fullName' => '', 'customerEmail' => '', 'message' => '');
 
+$siteKey = ''; 
+$secretKey = ''; 
+
 if (isset($_POST['submit'])) {
     $myEmail = "danysko5@gmail.com";
     $timeStamp = date("dd/M/YY HH:i:s");
@@ -42,3 +45,4 @@ if (isset($_POST['submit'])) {
         header("Location: public/mail_sent.php");
     }
 }
+

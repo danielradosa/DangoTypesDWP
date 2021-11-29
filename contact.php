@@ -34,9 +34,9 @@
         <br />
         <label for="message">Your message to us 👨🏻‍💻</label> <span class="error"><?php echo $errors['message'] ?></span> <br />
         <textarea name="message" id="message" cols="40" rows="6" required></textarea><br />
+        <div class="g-recaptcha" data-sitekey="<?php echo $siteKey; ?>"></div>
         <div class="form-buttons">
             <button type="submit" name="submit" class="send" value="SEND">SEND</button>
-            <button type="reset" class="messup">Wait, I messed up...</button>
         </div>
     </form>
 </div>

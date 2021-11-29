@@ -12,6 +12,7 @@
     <script src="https://kit.fontawesome.com/496d8d4e8f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/style.css" />
     <link rel="stylesheet" href="actions.css" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <title>dango types</title>
 </head>
 
