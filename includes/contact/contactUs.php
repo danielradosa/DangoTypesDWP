@@ -39,10 +39,21 @@ if (isset($_POST['submit'])) {
     if (empty($message)) {
         $errors['message'] = "A message is required.";
     } 
-    
-    if(!empty($fullName) && !empty($customerEmail) && !empty($message)) {
-        mail($myEmail, $chosenSubject, $body);
-        header("Location: public/mail_sent.php");
+
+    if(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response']) && !empty($fullName) && !empty($customerEmail) && !empty($message)){ 
+ 
+        // Verify the reCAPTCHA response 
+        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secretKey.'&response='.$_POST['g-recaptcha-response']); 
+         
+        // Decode json data 
+        $responseData = json_decode($verifyResponse); 
+         
+        // If reCAPTCHA response is valid 
+        if($responseData->success){ 
+            mail($myEmail, $chosenSubject, $body);
+            header("Location: public/mail_sent.php");
+        }
+    } else {
+        $statusMsg = 'Please check on the reCAPTCHA box.'; 
     }
 }
-
