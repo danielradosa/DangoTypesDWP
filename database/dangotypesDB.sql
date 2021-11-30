@@ -19,6 +19,7 @@ CREATE TABLE `address`  (
   `city` varchar(255) NOT NULL,
   `postalCode` int NOT NULL,
   `customerForeign` int NOT NULL,
+  `wasUpdated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`addrID`)
 );
 
@@ -84,3 +85,17 @@ ALTER TABLE `user` ADD CONSTRAINT UQ_userEmail UNIQUE (userEmail);
 
 CREATE VIEW switchesCategory AS SELECT * FROM product WHERE `type` = 'switch';
 CREATE VIEW diy_keyboardsCategory AS SELECT * FROM product WHERE `type` = 'diy_keyboard';
+
+DELIMITER //
+CREATE TRIGGER BeforeUpdateOnUser BEFORE UPDATE ON `address`
+FOR EACH ROW BEGIN
+SET new.wasUpdated = NOW();
+END //
+
+DELIMITER //
+CREATE TRIGGER AfterInsertInOrder AFTER INSERT ON `order` FOR EACH ROW
+BEGIN
+UPDATE `product` sp
+SET sp.stock = sp.stock - 1
+WHERE sp.productID = sp.productID;
+END //
