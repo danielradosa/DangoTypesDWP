@@ -1,6 +1,4 @@
-<?php
-include('includes/cart/components/cartGrabber.php');
-?>
+<?php include('includes/cart/components/cartGrabber.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
