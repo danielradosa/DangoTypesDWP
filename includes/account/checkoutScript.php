@@ -4,8 +4,10 @@ if (!isset($_SESSION)) {
 }
 
 include('includes/db_connect.php');
+include('includes/cart/components/cartGrabber.php');
 
 $userAdd = $_SESSION['userID'];
+$cart = $_SESSION['cart'];
 
 if (isset($_GET['total']) && isset($_GET['items'])) {
     $_SESSION['price'] = $_GET['total'];
@@ -59,12 +61,18 @@ if (isset($_POST["order"])) {
         $order_number = rand(1000, 9999);
         $defaultStatus = 'accepted';
         $placedAt = date("Y-m-d H:i:s");   
+        $defaultQuantity = 1;
 
         $orderQuery = "INSERT INTO `order`(`orderItems`, `orderMail`, `orderName`, `orderLastName`, `orderPhoneNum`, `orderStreetName`, `orderStreetNum`, `orderCountry`, `orderCity`, `orderPostalCode`, `orderNumber`, `orderPrice`, `orderStatus`, `placedAt`) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $sqlOrder = $conn->prepare($orderQuery);
         $sqlOrder->bind_param('sssssssssiisss', $chItems, $orderMail, $orderName, $orderLastName, $orderPhoneNum, $orderStreetName, $orderStreetNum, $orderCountry, $orderCity, $orderPostalCode, $order_number, $totalPrice, $defaultStatus, $placedAt);
         $sqlOrder->execute();
+
+        $orderDetails = "INSERT INTO `orderDetails` (`orderDetailsProductID`, `orderDetailsQuantity`, `orderDetailsForeign`) VALUES (?, ?, ?)";
+        $sqlDetails = $conn->prepare($orderDetails);
+        $sqlDetails->bind_param('iii', $id, $defaultQuantity, $order_number);
+        $sqlDetails->execute();
 
         $msg = "Hello $orderName,\nWe have received your order #$order_number\nAfter we receive your money, 
         the order will be shipped to your address: \n\n Name: $orderName $orderLastName\n Your Phone: $orderPhoneNum\n Street: $orderStreetName $orderStreetNum\n City: $orderPostalCode, $orderCity\n Country: $orderCountry

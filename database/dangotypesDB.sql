@@ -52,7 +52,6 @@ CREATE TABLE `user`  (
 CREATE TABLE `orderDetails` (
   `orderDetailsID` INT NOT NULL AUTO_INCREMENT,
   `orderDetailsProductID` INT NOT NULL,
-  `orderDetailsTitle` varchar(255) NOT NULL,
   `orderDetailsQuantity` INT NOT NULL,
   `orderDetailsForeign` INT NOT NULL,
   PRIMARY KEY (`orderDetailsID`)
@@ -91,6 +90,7 @@ ALTER TABLE `user` ADD CONSTRAINT `fk_user_address_1` FOREIGN KEY (`addressForei
 ALTER TABLE `order` ADD CONSTRAINT `fk_order_user_1` FOREIGN KEY (`orderNumber`) REFERENCES `user`(`userEmail`);
 ALTER TABLE `user` ADD CONSTRAINT `fk_order_usermail_1` FOREIGN KEY (`userEmail`) REFERENCES `address`(`customerForeign`);
 ALTER TABLE `orderDetails` ADD CONSTRAINT `fk_order_details_1` FOREIGN KEY (`orderDetailsForeign`) REFERENCES `order`(`orderID`);
+ALTER TABLE `orderDetails` ADD CONSTRAINT `fk_order_details_2` FOREIGN KEY (`orderDetailsProductID`) REFERENCES `product`(`productID`);
 ALTER TABLE `user` ADD CONSTRAINT UQ_userEmail UNIQUE (userEmail);
 
 CREATE VIEW switchesCategory AS SELECT * FROM product WHERE `type` = 'switch';
