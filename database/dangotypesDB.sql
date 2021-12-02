@@ -49,6 +49,15 @@ CREATE TABLE `user`  (
   PRIMARY KEY (`userID`)
 );
 
+CREATE TABLE `orderDetails` (
+  `orderDetailsID` INT NOT NULL AUTO_INCREMENT,
+  `orderDetailsProductID` INT NOT NULL,
+  `orderDetailsTitle` varchar(255) NOT NULL,
+  `orderDetailsQuantity` INT NOT NULL,
+  `orderDetailsForeign` INT NOT NULL,
+  PRIMARY KEY (`orderDetailsID`)
+);
+
 CREATE TABLE `order` (
   `orderID` int NOT NULL AUTO_INCREMENT,
   `orderItems` text NOT NULL,
@@ -81,6 +90,7 @@ ALTER TABLE `address` ADD CONSTRAINT `fk_user_foreign_1` FOREIGN KEY (`customerF
 ALTER TABLE `user` ADD CONSTRAINT `fk_user_address_1` FOREIGN KEY (`addressForeign`) REFERENCES `address`(`addrID`);
 ALTER TABLE `order` ADD CONSTRAINT `fk_order_user_1` FOREIGN KEY (`orderNumber`) REFERENCES `user`(`userEmail`);
 ALTER TABLE `user` ADD CONSTRAINT `fk_order_usermail_1` FOREIGN KEY (`userEmail`) REFERENCES `address`(`customerForeign`);
+ALTER TABLE `orderDetails` ADD CONSTRAINT `fk_order_details_1` FOREIGN KEY (`orderDetailsForeign`) REFERENCES `order`(`orderID`);
 ALTER TABLE `user` ADD CONSTRAINT UQ_userEmail UNIQUE (userEmail);
 
 CREATE VIEW switchesCategory AS SELECT * FROM product WHERE `type` = 'switch';
@@ -97,5 +107,5 @@ CREATE TRIGGER AfterInsertInOrder AFTER INSERT ON `order` FOR EACH ROW
 BEGIN
 UPDATE `product` sp
 SET sp.stock = sp.stock - 1
-WHERE sp.productID = sp.productID;
+WHERE sp.productID = NEW.productID;
 END //
