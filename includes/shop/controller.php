@@ -20,3 +20,4 @@ $start_from = ($page - 1) * $product_per_page;
 
 $sqlAll = "SELECT * FROM `product` ORDER BY `dateCreated` DESC LIMIT $start_from, $product_per_page";
 $result = $conn->query($sqlAll);
+

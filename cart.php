@@ -60,10 +60,10 @@ if (!empty($_SESSION['cart'])) {
 
 
     <?php if (isset($_SESSION['userID']) && !empty($_SESSION['cart'])) { ?>
-        <a href='checkout.php?total=<?php echo $total; ?>&items=<?php echo $itemTitle; ?>' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Checkout</a>
+        <a href='checkout.php?total=<?php echo $total; ?>&items=<?php echo $itemTitle; ?>' class="checkout-but">Checkout</a>
 
     <?php } else if (!empty($_SESSION['cart']) && !isset($_SESSION['userID'])) { ?>
-        <a href='account.php' style='color: white; background-color: black; text-decoration:none; text-align: center; padding: 1em;'>Login to checkout</a>
+        <a href='account.php' class="checkout-but">Login to checkout</a>
     <?php } ?>
 
 </div>

@@ -376,6 +376,14 @@ img.arrow {
   background: blue;
 }
 
+.checkout-but {
+  color: white; 
+  background-color: black; 
+  text-decoration:none; 
+  text-align: center; 
+  padding: 1em;
+}
+
 .latest-keebs {
   width: 100%;
   display: flex;
