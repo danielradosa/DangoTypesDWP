@@ -77,7 +77,7 @@ if (isset($_POST["order"])) {
         $msg = "Hello $orderName,\nWe have received your order #$order_number\nAfter we receive your money, 
         the order will be shipped to your address: \n\n Name: $orderName $orderLastName\n Your Phone: $orderPhoneNum\n Street: $orderStreetName $orderStreetNum\n City: $orderPostalCode, $orderCity\n Country: $orderCountry
         \n\n Price to pay: $totalPrice\n Send money to this account: DK7250518331878966 and put your order number into comments of the transaction.";
-        mail("$orderMail", "We accepted your order: #$order_number", $msg);
+        mail("$orderMail", "dangotypes™: We accepted your order: #$order_number", $msg);
 
         header("Location: checkoutComplete.php?order=$order_number");
 

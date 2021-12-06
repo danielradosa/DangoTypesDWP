@@ -28,3 +28,4 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo "<div class='error'>Please fill out everything</div>";
     }
 }
+

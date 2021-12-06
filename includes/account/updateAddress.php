@@ -28,7 +28,8 @@ if (isset($_POST['update'])) {
         $city = mysqli_real_escape_string($conn, $_POST['cityU']);
         $country = mysqli_real_escape_string($conn, $_POST['countryU']);
 
-        $updateQuery = $conn->prepare("UPDATE `address` SET `firstName` = ?, `lastName` = ?, `phoneNum` = ?, `streetName` = ?, `streetNum` = ?, `country` = ?, `city` = ?, `postalCode` = ? WHERE `customerForeign` = ?");
+        $updateQuery = $conn->prepare("UPDATE `address` SET `firstName` = ?, `lastName` = ?, `phoneNum` = ?, 
+        `streetName` = ?, `streetNum` = ?, `country` = ?, `city` = ?, `postalCode` = ? WHERE `customerForeign` = ?");
         $updateQuery->bind_param('sssssssii', $firstName, $lastName, $phoneNum, $streetName, $streetNum, $country, $city, $postalCode, $currentUserID);
         $updateQuery->execute();
         header("Location: ?succesfully updated.php");

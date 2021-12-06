@@ -357,6 +357,13 @@ img.arrow {
   }
 }
 
+.admin {
+  color: white; 
+  background-color: black; 
+  padding: 1em; 
+  text-decoration: none;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
