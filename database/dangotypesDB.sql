@@ -103,9 +103,9 @@ SET new.wasUpdated = NOW();
 END //
 
 DELIMITER //
-CREATE TRIGGER AfterInsertInOrder AFTER INSERT ON `order` FOR EACH ROW
+CREATE TRIGGER AfterInsertInOrder AFTER INSERT ON `orderdetails` FOR EACH ROW
 BEGIN
-UPDATE `product` sp
-SET sp.stock = sp.stock - 1
-WHERE sp.productID = NEW.productID;
+UPDATE `product` sp 
+SET sp.stock = sp.stock - new.orderDetailsQuantity
+WHERE sp.productID = new.orderDetailsProductID;
 END //
