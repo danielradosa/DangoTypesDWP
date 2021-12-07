@@ -9,13 +9,22 @@ include('includes/cart/components/cartGrabber.php');
 $userAdd = $_SESSION['userID'];
 $cart = $_SESSION['cart'];
 
+function insertOrderData($id, $defaultQuantity, $order_number)
+{
+    include('includes/db_connect.php');
+    $orderDetails = "INSERT INTO `orderDetails` (`orderDetailsProductID`, `orderDetailsQuantity`, `orderDetailsForeign`) VALUES (?, ?, ?)";
+    $sqlDetails = $conn->prepare($orderDetails);
+    $sqlDetails->bind_param('iii', $id, $defaultQuantity, $order_number);
+    $sqlDetails->execute();
+}
+
 if (isset($_GET['total']) && isset($_GET['items'])) {
     $_SESSION['price'] = $_GET['total'];
     $_SESSION['checkout'] = $_GET['items'];
 }
 
 $chItems = $_SESSION['checkout'];
-$totalPrice = '$'.$_SESSION['price'];
+$totalPrice = '$' . $_SESSION['price'];
 
 $sql = "SELECT * FROM address WHERE addrID = $userAdd";
 $result = $conn->query($sql);
@@ -46,9 +55,11 @@ if (isset($_POST["order"])) {
     }
     if (empty($_POST['orderCityA'])) {
         echo "City is required";
-    } 
-    if (!empty($_POST['orderNameA']) && !empty($_POST['orderLastNameA']) && !empty($_POST['orderMailA']) && !empty($_POST['orderPhoneNumA']) && !empty($_POST['orderStreetNameA']) 
-    && !empty($_POST['orderStreetNumA']) && !empty($_POST['orderPostalCodeA']) && !empty($_POST['orderCityA']) && !empty($_POST['orderCountryA'])) {
+    }
+    if (
+        !empty($_POST['orderNameA']) && !empty($_POST['orderLastNameA']) && !empty($_POST['orderMailA']) && !empty($_POST['orderPhoneNumA']) && !empty($_POST['orderStreetNameA'])
+        && !empty($_POST['orderStreetNumA']) && !empty($_POST['orderPostalCodeA']) && !empty($_POST['orderCityA']) && !empty($_POST['orderCountryA'])
+    ) {
         $orderMail = mysqli_real_escape_string($conn, $_POST['orderMailA']);
         $orderName = mysqli_real_escape_string($conn, $_POST['orderNameA']);
         $orderLastName = mysqli_real_escape_string($conn, $_POST['orderLastNameA']);
@@ -60,7 +71,7 @@ if (isset($_POST["order"])) {
         $orderPostalCode = mysqli_real_escape_string($conn, $_POST['orderPostalCodeA']);
         $order_number = rand(1000, 9999);
         $defaultStatus = 'accepted';
-        $placedAt = date("Y-m-d H:i:s");   
+        $placedAt = date("Y-m-d H:i:s");
         $defaultQuantity = 1;
 
         $orderQuery = "INSERT INTO `order`(`orderItems`, `orderMail`, `orderName`, `orderLastName`, `orderPhoneNum`, `orderStreetName`, `orderStreetNum`, `orderCountry`, `orderCity`, `orderPostalCode`, `orderNumber`, `orderPrice`, `orderStatus`, `placedAt`) 
@@ -69,10 +80,11 @@ if (isset($_POST["order"])) {
         $sqlOrder->bind_param('sssssssssiisss', $chItems, $orderMail, $orderName, $orderLastName, $orderPhoneNum, $orderStreetName, $orderStreetNum, $orderCountry, $orderCity, $orderPostalCode, $order_number, $totalPrice, $defaultStatus, $placedAt);
         $sqlOrder->execute();
 
-        $orderDetails = "INSERT INTO `orderDetails` (`orderDetailsProductID`, `orderDetailsQuantity`, `orderDetailsForeign`) VALUES (?, ?, ?)";
-        $sqlDetails = $conn->prepare($orderDetails);
-        $sqlDetails->bind_param('iii', $id, $defaultQuantity, $order_number);
-        $sqlDetails->execute();
+        if (!empty($_SESSION['cart'])) {
+            foreach ($_SESSION['cart'] as $id) {
+                insertOrderData($id, $defaultQuantity, $order_number);
+            }
+        }
 
         $msg = "Hello $orderName,\nWe have received your order #$order_number\nAfter we receive your money, 
         the order will be shipped to your address: \n\n Name: $orderName $orderLastName\n Your Phone: $orderPhoneNum\n Street: $orderStreetName $orderStreetNum\n City: $orderPostalCode, $orderCity\n Country: $orderCountry
@@ -81,7 +93,7 @@ if (isset($_POST["order"])) {
 
         header("Location: checkoutComplete.php?order=$order_number");
 
-        unset($_SESSION['cart']);  
+        unset($_SESSION['cart']);
         die;
     } else {
         echo 'query error: ' . mysqli_error($conn);
