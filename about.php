@@ -15,7 +15,7 @@
     <p style="color: white; padding: 2em; font-size: 3vw; text-align: center;">
         <?php echo $row['companyDescription']; ?>
         <span style="font-size: 2vw; padding: 2em; display: block; color: gray;">
-            If you need any guidance please, <br> contact us either through our <a href="contact">contact form</a> <br>
+            If you need any guidance please, <br> contact us either through our <a href="contact.php">contact form</a> <br>
             or call us here: <?php echo $row['contactNumber']; ?>
         </span>
     </p>
